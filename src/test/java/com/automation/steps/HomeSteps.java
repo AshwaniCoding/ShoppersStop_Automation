@@ -7,13 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class HomeSteps extends BaseSteps{
+public class HomeSteps extends BaseSteps {
 
 
     AndroidHomePage androidHomePage = new AndroidHomePage();
 
-    @Given("user open application")
-    public void userOpenApplication() {
+    @Given("user open application or website")
+    public void userOpenApplicationOrWebsite() {
         //Have to change the method name cause website doesnt have a 'DontAllow' button
         androidHomePage.isHomePageDisplayed();
     }
@@ -23,14 +23,9 @@ public class HomeSteps extends BaseSteps{
         androidHomePage.searchFor(item);
     }
 
-    @Then("verify user is on home page")
-    public void verifyUserIsOnHomePage() {
+    @Then("verify user is on home page of application or website")
+    public void verifyUserIsOnHomePageOfApplicationOrWebsite() {
         androidHomePage.isHomePageDisplayed();
-    }
-
-    @When("user login with a valid phone or email {string}")
-    public void userLoginWithAValidPhoneOrEmail(String arg0) {
-
     }
 
     @And("enter the one time password")
@@ -38,9 +33,32 @@ public class HomeSteps extends BaseSteps{
 
     }
 
-    @Then("verify user is successfully logged in the application")
-    public void verifyUserIsSuccessfullyLoggedInTheApplication() {
+    @Then("verify user is successfully logged in the application or website")
+    public void verifyUserIsSuccessfullyLoggedInTheApplicationOrWebsite() {
 
     }
 
+    @When("user click on my account page link")
+    public void userClickOnMyAccountPageLink() {
+        
+    }
+
+    @Then("verify user is successfully logged out the application")
+    public void verifyUserIsSuccessfullyLoggedOutTheApplication() {
+
+    }
+
+    @When("user navigate to my cart page")
+    public void userNavigateToMyCartPage() {
+
+    }
+
+    @When("user navigate to home page")
+    public void userNavigateToHomePage() {
+
+    }
+
+    @When("user search for a product {string}")
+    public void userSearchForAProduct(String arg0) {
+    }
 }

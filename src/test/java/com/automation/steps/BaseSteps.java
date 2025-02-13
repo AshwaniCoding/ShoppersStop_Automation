@@ -22,7 +22,6 @@ public class BaseSteps {
         } else {
             homePage = new AndroidHomePage();
             productPage = new AndroidProductsPage();
-
         }
     }
 
