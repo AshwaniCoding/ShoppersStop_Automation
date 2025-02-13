@@ -40,6 +40,7 @@ public class AndroidHomePage extends BasePage {
         setImplicitWait(60000);
 
         Assert.assertTrue(applicationHeader.isDisplayed());
+        
     }
 
     public void searchFor(String item) {
