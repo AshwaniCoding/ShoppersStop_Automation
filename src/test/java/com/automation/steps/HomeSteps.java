@@ -4,10 +4,10 @@ import com.automation.pages.android.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class HomeSteps {
+public class HomeSteps extends BaseSteps{
     HomePage homePage = new HomePage();
-    @Given("user opens application")
-    public void userOpensApplication() {
+    @Given("user open application")
+    public void userOpenApplication() {
         homePage.clickOnDontAllow();
 
     }
