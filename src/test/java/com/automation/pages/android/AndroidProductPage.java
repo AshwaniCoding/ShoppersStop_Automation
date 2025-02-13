@@ -8,19 +8,19 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ProductPage extends BasePage {
-    String temp;
+public class AndroidProductPage extends BasePage {
+    String filterName;
 
     @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"FILTER\"]")
-    WebElement filterBtn;
+    WebElement chooseFilterBtn;
 
     String filter = "//*[contains(@content-desc,'%s')]";
 
-    @FindBy(xpath = "//android.widget.Button[@content-desc=\"SHOW ITEMS\"]")
-    WebElement showItems;
+    @FindBy(xpath = "//*[contains(@content-desc,\"SHOW\")]")
+    WebElement showItemsButton;
 
     public void chooseFilters() {
-        filterBtn.click();
+        chooseFilterBtn.click();
         List<String> list = ConfigReader.getPropertyByPartialKey("filter");
         for(String s: list){
             try {
@@ -28,14 +28,13 @@ public class ProductPage extends BasePage {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            temp = s.substring(0,s.indexOf('.'));
-            WebElement filterToClick = driver.findElement(By.xpath(String.format(filter,temp)));
+            filterName = s.substring(0,s.indexOf('.'));
+            WebElement filterToClick = driver.findElement(By.xpath(String.format(filter, filterName)));
             filterToClick.click();
             WebElement filterSubOption = driver.findElement(By.xpath(String.format(filter,ConfigReader.getConfigValue(s))));
             filterSubOption.click();
         }
-
-        showItems.click();
+        showItemsButton.click();
 
     }
 }

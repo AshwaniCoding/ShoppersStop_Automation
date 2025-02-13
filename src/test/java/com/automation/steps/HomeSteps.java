@@ -1,20 +1,21 @@
 package com.automation.steps;
 
-import com.automation.pages.android.HomePage;
+import com.automation.pages.android.AndroidHomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class HomeSteps {
-    HomePage homePage = new HomePage();
+    AndroidHomePage androidHomePage = new AndroidHomePage();
     @Given("user opens application")
     public void userOpensApplication() {
-        homePage.clickOnDontAllow();
+        //Have to change the method name cause website doesnt have a 'DontAllow' button
+        androidHomePage.isHomePageDisplayed();
 
     }
 
 
     @Then("user searches for {string}")
     public void userSearchesFor(String item) {
-        homePage.searchFor(item);
+        androidHomePage.searchFor(item);
     }
 }
