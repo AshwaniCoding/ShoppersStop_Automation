@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
-public class HomeSteps extends BaseSteps {
+public class HomePageSteps extends BaseSteps {
 
 
     AndroidHomePage androidHomePage = new AndroidHomePage();

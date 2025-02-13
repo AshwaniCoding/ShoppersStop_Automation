@@ -3,7 +3,7 @@ package com.automation.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class CartSteps extends BaseSteps {
+public class CartPageSteps extends BaseSteps {
 
     @Then("verify the product added to the cart is still present after login")
     public void verifyTheProductAddedToTheCartIsStillPresentAfterLogin() {
@@ -27,4 +27,5 @@ public class CartSteps extends BaseSteps {
     @When("user removes all items from the cart")
     public void userRemovesAllItemsFromTheCart() {
     }
+
 }

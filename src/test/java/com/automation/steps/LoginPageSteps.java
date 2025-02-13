@@ -3,7 +3,7 @@ package com.automation.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class LoginSteps extends BaseSteps {
+public class LoginPageSteps extends BaseSteps {
 
     @When("user login with a valid phone or email {string}")
     public void userLoginWithAValidPhoneOrEmail(String phoneOrEmail) {
