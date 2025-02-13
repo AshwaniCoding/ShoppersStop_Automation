@@ -1,12 +1,12 @@
 package com.automation.steps;
 
-import com.automation.pages.android.AndroidProductPage;
+import com.automation.pages.android.AndroidProductsPage;
 import io.cucumber.java.en.And;
 
 public class ProductPageSteps {
-    AndroidProductPage androidProductPage = new AndroidProductPage();
+    AndroidProductsPage androidProductsPage = new AndroidProductsPage();
     @And("user sets desired filters")
     public void userSetsDesiredFilters() {
-        androidProductPage.chooseFilters();
+        androidProductsPage.chooseFilters();
     }
 }
