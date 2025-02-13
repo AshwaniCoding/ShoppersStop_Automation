@@ -1,13 +1,13 @@
 package com.automation.pages.android;
 
-import com.automation.pages.common.BasePage;
+import com.automation.pages.interfaces.HomePage;
 import com.automation.utils.ConfigReader;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AndroidHomePage extends BasePage {
+public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @FindBy(xpath = "//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button\"]")
     WebElement doNotAllowNotificationBtn;

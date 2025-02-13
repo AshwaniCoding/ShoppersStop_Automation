@@ -1,4 +1,4 @@
-package com.automation.pages.common;
+package com.automation.pages.android;
 
 import com.automation.utils.DriverManager;
 import io.appium.java_client.android.AndroidDriver;
@@ -19,12 +19,12 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
-public class BasePage {
+public class AndroidBasePage {
 
-    public WebDriver driver;
+    WebDriver driver;
     WebDriverWait wait;
 
-    public BasePage() {
+    public AndroidBasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -32,12 +32,10 @@ public class BasePage {
 
 
     public void waitForElementVisible(WebElement ele) {
-
         wait.until(ExpectedConditions.visibilityOf(ele));
     }
 
     public void waitForElementClickable(WebElement ele) {
-
         wait.until(ExpectedConditions.elementToBeClickable(ele));
     }
 
@@ -76,7 +74,6 @@ public class BasePage {
     }
 
     public void setImplicitWait(int sec) {
-
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(sec));
     }
 

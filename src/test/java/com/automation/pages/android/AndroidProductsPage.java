@@ -1,6 +1,6 @@
 package com.automation.pages.android;
 
-import com.automation.pages.common.BasePage;
+import com.automation.pages.interfaces.ProductsPage;
 import com.automation.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class AndroidProductPage extends BasePage {
+public class AndroidProductsPage extends AndroidBasePage implements ProductsPage {
     String filterName;
 
     @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"FILTER\"]")

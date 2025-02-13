@@ -4,7 +4,8 @@ import com.automation.pages.android.AndroidHomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class HomeSteps {
+public class HomeSteps extends BaseSteps{
+
     AndroidHomePage androidHomePage = new AndroidHomePage();
 
     @Given("user open application")

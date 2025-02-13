@@ -1,6 +1,5 @@
 package com.automation.runner;
 
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -9,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com.automation.steps",
-        plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber.html","com.cucumber.listener.ExtentCucumberFormatter:"}
+        plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber.html", "com.cucumber.listener.ExtentCucumberFormatter:"},
+        tags = "@web"
 )
-public class TestRunner {
-
+public class TestRunnerWeb {
 }
