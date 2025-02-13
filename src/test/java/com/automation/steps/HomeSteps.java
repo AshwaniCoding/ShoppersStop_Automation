@@ -6,11 +6,11 @@ import io.cucumber.java.en.Then;
 
 public class HomeSteps {
     AndroidHomePage androidHomePage = new AndroidHomePage();
-    @Given("user opens application")
-    public void userOpensApplication() {
+
+    @Given("user open application")
+    public void userOpenApplication() {
         //Have to change the method name cause website doesnt have a 'DontAllow' button
         androidHomePage.isHomePageDisplayed();
-
     }
 
 
