@@ -25,22 +25,23 @@ public class HomeSteps extends BaseSteps{
 
     @Then("verify user is on home page")
     public void verifyUserIsOnHomePage() {
-        androidHomePage.isHomePageDisplayed();
+        androidHomePage.verifyUserIsOnHomePage();
     }
 
     @When("user login with a valid phone or email {string}")
-    public void userLoginWithAValidPhoneOrEmail(String arg0) {
+    public void userLoginWithAValidPhoneOrEmail(String loginCredentials) {
+        androidHomePage.loginWithUserCredential(loginCredentials);
 
     }
 
     @And("enter the one time password")
     public void enterTheOneTimePassword() {
-
+        androidHomePage.verifyUserEnteredOtp();
     }
 
     @Then("verify user is successfully logged in the application")
     public void verifyUserIsSuccessfullyLoggedInTheApplication() {
-
+        androidHomePage.verifyUserIsOnMyAccountPage();
     }
 
 }

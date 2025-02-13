@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
@@ -27,6 +28,24 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     String suggestion = "//android.view.View[@content-desc='%s']";
         //searchSuggestion
+
+    @FindBy(xpath="//android.widget.ImageView[@content-desc=\"ACCOUNT, Tab 5 of 5\"]")
+    WebElement accountTab;
+
+    @FindBy(xpath="//android.widget.Button[@content-desc=\"LOGIN\"]")
+    WebElement loginButton;
+
+    @FindBy(xpath = "//android.widget.EditText")
+    WebElement usernameInput;
+
+    @FindBy(xpath = "//android.view.View[@content-desc=\"PROCEED\"]")
+    WebElement proceedButton;
+
+    @FindBy(xpath = "//android.view.View[@content-desc=\"VERIFY OTP\"]")
+    WebElement verifyOtpButton;
+
+    @FindBy(xpath="//android.widget.ImageView[contains(@content-desc, 'Become')]")
+    WebElement userDetails;
 
                 //isHomePageDisplayed
     public void isHomePageDisplayed() {
@@ -53,5 +72,29 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
         //driver1.pressKey(AndroidKeyCode.KEYCODE_ENTER);
         WebElement suggestionToSelect = driver.findElement(By.xpath(String.format(suggestion,ConfigReader.getConfigValue(item))));
         suggestionToSelect.click();
+    }
+
+    public void verifyUserIsOnHomePage() {
+        Assert.assertTrue(applicationHeader.isDisplayed());
+        Assert.assertTrue((searchBar.isDisplayed()));
+    }
+
+    public void loginWithUserCredential(String loginCredentials) {
+        accountTab.click();
+        loginButton.click();
+        usernameInput.click();
+        usernameInput.sendKeys(ConfigReader.getConfigValue(loginCredentials));
+        proceedButton.click();
+    }
+
+    public void verifyUserEnteredOtp() {
+        wait.until(ExpectedConditions.elementToBeClickable(verifyOtpButton));
+        Assert.assertTrue(verifyOtpButton.isEnabled());
+        verifyOtpButton.click();
+        verifyOtpButton.click();
+    }
+
+    public void verifyUserIsOnMyAccountPage() {
+        userDetails.isDisplayed();
     }
 }
