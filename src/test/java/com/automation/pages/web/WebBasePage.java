@@ -41,7 +41,7 @@ public class WebBasePage {
 
     public boolean isDisplayed(WebElement element) {
         try {
-            setImplicitWait(0);
+            setImplicitWait(3);
             return element.isDisplayed();
         } catch (Exception e) {
             return false;

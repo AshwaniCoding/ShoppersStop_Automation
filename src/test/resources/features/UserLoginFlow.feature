@@ -20,3 +20,4 @@ Feature: Validate Login Functionality
       | phone-or-email |
       | 1111111111     |
       | 2222222222     |
+      | test@gmail     |

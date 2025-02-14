@@ -33,7 +33,7 @@ public class HomePageSteps extends BaseSteps {
 
     @Then("verify user is successfully logged in the application or website")
     public void verifyUserIsSuccessfullyLoggedInTheApplicationOrWebsite() {
-        myAccountPage.isUserLoggedIn();
+        Assert.assertTrue(myAccountPage.isUserLoggedIn());
     }
 
     @When("user click on my account page link")

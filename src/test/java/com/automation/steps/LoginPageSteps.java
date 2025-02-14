@@ -3,6 +3,7 @@ package com.automation.steps;
 import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class LoginPageSteps extends BaseSteps {
 
@@ -16,7 +17,7 @@ public class LoginPageSteps extends BaseSteps {
 
     @Then("verify user receives an error message indicating an invalid email or phone number")
     public void verifyUserReceivesAnErrorMessageIndicatingAnInvalidEmailOrPhoneNumber() {
-
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed());
     }
 
     @When("user log in again with a valid phone or email {string}")
