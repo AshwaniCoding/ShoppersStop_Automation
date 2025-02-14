@@ -12,7 +12,6 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @FindBy(xpath = "//android.widget.Button[@resource-id=\"com.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button\"]")
     WebElement doNotAllowNotificationBtn;
 
-
     @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"What are you looking for?\"]")
     WebElement searchBar;
 
@@ -26,32 +25,19 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     String updatedSearchBar = "//android.widget.ImageView[@text='%s']";
 
     String suggestion = "//android.view.View[@content-desc='%s']";
-        //searchSuggestion
 
-                //isHomePageDisplayed
-    public void isHomePageDisplayed() {
-        //Handling uncertainty of notification
-        try{
-            setImplicitWait(1000);
-            doNotAllowNotificationBtn.click();
-        }catch (Exception e){
-            System.out.println("Notification was not displayed");
-        }
-        setImplicitWait(60000);
+    @Override
+    public void openApplication() {
 
-        Assert.assertTrue(applicationHeader.isDisplayed());
-        
     }
 
-    public void searchFor(String item) {
-        searchBar.click();
-        searchBarInput.click();
-        searchBarInput.sendKeys(ConfigReader.getConfigValue(item));
-        searchBarInput = driver.findElement(By.xpath(String.format(updatedSearchBar,ConfigReader.getConfigValue(item))));
-        //searchBarInput.sendKeys(Keys.ENTER);
-        //AndroidDriver driver1 = (AndroidDriver)driver;
-        //driver1.pressKey(AndroidKeyCode.KEYCODE_ENTER);
-        WebElement suggestionToSelect = driver.findElement(By.xpath(String.format(suggestion,ConfigReader.getConfigValue(item))));
-        suggestionToSelect.click();
+    @Override
+    public boolean isHomePageDisplayed() {
+        return false;
+    }
+
+    @Override
+    public void clickOnMyAccountLink() {
+
     }
 }

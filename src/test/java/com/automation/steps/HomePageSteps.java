@@ -5,42 +5,40 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 
 public class HomePageSteps extends BaseSteps {
 
 
-    AndroidHomePage androidHomePage = new AndroidHomePage();
-
     @Given("user open application or website")
     public void userOpenApplicationOrWebsite() {
-        //Have to change the method name cause website doesnt have a 'DontAllow' button
-        androidHomePage.isHomePageDisplayed();
+        homePage.openApplication();
     }
 
     @Then("user searches for {string}")
     public void userSearchesFor(String item) {
-        androidHomePage.searchFor(item);
+
     }
 
     @Then("verify user is on home page of application or website")
     public void verifyUserIsOnHomePageOfApplicationOrWebsite() {
-        androidHomePage.isHomePageDisplayed();
+        Assert.assertTrue(homePage.isHomePageDisplayed());
     }
 
     @And("enter the one time password")
     public void enterTheOneTimePassword() {
-
+        loginPage.enterOneTimePassword();
     }
 
     @Then("verify user is successfully logged in the application or website")
     public void verifyUserIsSuccessfullyLoggedInTheApplicationOrWebsite() {
-
+        myAccountPage.isUserLoggedIn();
     }
 
     @When("user click on my account page link")
     public void userClickOnMyAccountPageLink() {
-        
+        homePage.clickOnMyAccountLink();
     }
 
     @Then("verify user is successfully logged out the application")

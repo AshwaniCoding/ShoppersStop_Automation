@@ -6,7 +6,8 @@ Feature: Validate Cart Persistence Functionality
     Then verify user is on home page of application or website
 
   Scenario: Verify cart items persist after logging out and logging in
-    When user login with a valid phone or email "phone.or.email"
+    When user click on my account page link
+    And user login with a valid phone or email "phone.or.email"
     And enter the one time password
     Then verify user is successfully logged in the application or website
     When user search for a product "product.name"
