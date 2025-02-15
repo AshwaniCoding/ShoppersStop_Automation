@@ -2,6 +2,7 @@ package com.automation.pages.android;
 
 import com.automation.pages.interfaces.ProductsPage;
 import com.automation.utils.ConfigReader;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,12 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     @FindBy(xpath = "//*[contains(@content-desc,\"SHOW\")]")
     WebElement showItemsButton;
+
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,\"Watch\")]")
+    List<WebElement> productNames;
+
+    @FindBy(xpath = "//android.view.View[@content-desc and @class=\"android.view.View\"]")
+    List<WebElement> productNames2;
 
     public void chooseFilters() {
         chooseFilterBtn.click();
@@ -36,5 +43,14 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
         }
         showItemsButton.click();
 
+    }
+
+    @Override
+    public void verifySearchResultsAreRelevant(String productName) {
+//        Assert.assertEquals(productNames.size(),5);
+
+        for(WebElement we : productNames2){
+            Assert.assertTrue(we.getText().contains(productName));
+        }
     }
 }

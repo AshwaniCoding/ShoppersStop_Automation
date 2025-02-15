@@ -44,6 +44,7 @@ public class HomePageSteps extends BaseSteps {
     @Then("verify user is successfully logged out the application")
     public void verifyUserIsSuccessfullyLoggedOutTheApplication() {
 
+
     }
 
     @When("user navigate to my cart page")
@@ -57,6 +58,7 @@ public class HomePageSteps extends BaseSteps {
     }
 
     @When("user search for a product {string}")
-    public void userSearchForAProduct(String arg0) {
+    public void userSearchForAProduct(String productName) {
+        homePage.searchForProduct(productName);
     }
 }

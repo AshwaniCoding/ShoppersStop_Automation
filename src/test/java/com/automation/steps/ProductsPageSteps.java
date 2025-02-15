@@ -22,5 +22,6 @@ public class ProductsPageSteps {
 
     @Then("verify the search results are relevant to {string}")
     public void verifyTheSearchResultsAreRelevantTo(String productName) {
+        androidProductsPage.verifySearchResultsAreRelevant(productName);
     }
 }

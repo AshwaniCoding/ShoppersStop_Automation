@@ -6,4 +6,8 @@ public interface HomePage {
     boolean isHomePageDisplayed();
 
     void clickOnMyAccountLink();
+
+    default void searchForProduct(String productName) {
+
+    }
 }

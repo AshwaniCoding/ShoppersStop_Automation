@@ -32,6 +32,7 @@ public class AndroidBasePage {
 
 
     public void waitForElementVisible(WebElement ele) {
+
         wait.until(ExpectedConditions.visibilityOf(ele));
     }
 
@@ -62,10 +63,10 @@ public class AndroidBasePage {
         }
     }
 
-    public boolean isDisplayed(String xpath) {
+    public boolean isDisplayed(WebElement element) {
         try {
             setImplicitWait(5000);
-            return driver.findElement(By.xpath(xpath)).isDisplayed();
+            return element.isDisplayed();
         } catch (Exception e) {
             return false;
         } finally {
