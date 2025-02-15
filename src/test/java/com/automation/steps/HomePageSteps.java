@@ -46,8 +46,8 @@ public class HomePageSteps extends BaseSteps {
 
     }
 
-    @When("user navigate to my cart page")
-    public void userNavigateToMyCartPage() {
+    @When("user navigates to my cart page")
+    public void userNavigatesToMyCartPage() {
 
     }
 
@@ -58,5 +58,13 @@ public class HomePageSteps extends BaseSteps {
 
     @When("user search for a product {string}")
     public void userSearchForAProduct(String arg0) {
+    }
+
+    @When("user navigates to wishlist page")
+    public void userNavigatesToWishlistPage() {
+    }
+
+    @When("user navigates to the previous page")
+    public void userNavigatesToThePreviousPage() {
     }
 }

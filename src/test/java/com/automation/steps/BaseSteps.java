@@ -1,18 +1,9 @@
 package com.automation.steps;
 
 
-import com.automation.pages.android.AndroidHomePage;
-import com.automation.pages.android.AndroidLoginPage;
-import com.automation.pages.android.AndroidMyAccountPage;
-import com.automation.pages.android.AndroidProductsPage;
-import com.automation.pages.interfaces.HomePage;
-import com.automation.pages.interfaces.LoginPage;
-import com.automation.pages.interfaces.MyAccountPage;
-import com.automation.pages.interfaces.ProductsPage;
-import com.automation.pages.web.WebHomePage;
-import com.automation.pages.web.WebLoginPage;
-import com.automation.pages.web.WebMyAccountPage;
-import com.automation.pages.web.WebProductsPage;
+import com.automation.pages.android.*;
+import com.automation.pages.interfaces.*;
+import com.automation.pages.web.*;
 
 public class BaseSteps {
 
@@ -20,6 +11,8 @@ public class BaseSteps {
     LoginPage loginPage;
     ProductsPage productPage;
     MyAccountPage myAccountPage;
+    CartPage cartPage;
+    WishlistPage wishlistPage;
 
 
     public BaseSteps() {
@@ -29,11 +22,15 @@ public class BaseSteps {
             productPage = new WebProductsPage();
             loginPage = new WebLoginPage();
             myAccountPage = new WebMyAccountPage();
+            cartPage = new WebCartPage();
+            wishlistPage = new WebWishlistPage();
         } else {
             homePage = new AndroidHomePage();
             productPage = new AndroidProductsPage();
             loginPage = new AndroidLoginPage();
             myAccountPage = new AndroidMyAccountPage();
+            cartPage = new AndroidCartPage();
+            wishlistPage = new AndroidWishlistPage();
         }
     }
 
