@@ -14,17 +14,14 @@ public interface HomePage {
     default void clickOnLoginBtn() {
     }
 
-<<<<<<< HEAD
-    default boolean isUserLoggedOut() {
-        return false;
-    }
+    boolean isUserLoggedOut();
 
     boolean isMessageDisplayed(String message);
 
     void clickOnHomePageLink();
-=======
+
     default void clickOnSearchButton() {
 
     }
->>>>>>> fa25a005d1db2293d205aa05ee48259da8756ff1
+
 }

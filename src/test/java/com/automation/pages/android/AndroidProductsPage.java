@@ -46,6 +46,11 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     }
 
     @Override
+    public boolean isSearchResultsAreRelevant(String productName) {
+        return false;
+    }
+
+    @Override
     public void verifySearchResultsAreRelevant(String productName) {
 //        Assert.assertEquals(productNames.size(),5);
 

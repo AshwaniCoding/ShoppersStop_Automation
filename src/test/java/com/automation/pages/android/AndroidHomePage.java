@@ -68,10 +68,8 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
             skipPopUp.click();
         }
         searchBarInput.sendKeys(productName);
-<<<<<<< HEAD
         WebElement suggestedOption = driver.findElement(By.xpath(String.format(suggestion, productName)));
-=======
-        suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
+        suggestedOption = driver.findElement(By.xpath(String.format(suggestion, productName)));
     }
 
     @Override
@@ -79,8 +77,6 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 //        while(isDisplayed(suggestedOption)){
 //            suggestedOption.click();
 //        }
-
->>>>>>> fa25a005d1db2293d205aa05ee48259da8756ff1
         suggestedOption.click();
         suggestedOption.click();
     }
@@ -88,6 +84,11 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @Override
     public void clickOnSearchBtn() {
 
+    }
+
+    @Override
+    public boolean isUserLoggedOut() {
+        return false;
     }
 
     @Override

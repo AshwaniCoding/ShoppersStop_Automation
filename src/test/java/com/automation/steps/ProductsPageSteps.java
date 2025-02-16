@@ -21,7 +21,11 @@ public class ProductsPageSteps extends BaseSteps {
 
     @Then("verify the search results are relevant to {string}")
     public void verifyTheSearchResultsAreRelevantTo(String productName) {
-        productsPage.verifySearchResultsAreRelevant(productName);
+        // It should be boolean because we are verifying so check the method and implement again
+        // Also remove the method verifySearchResultsAreRelevant
+        // Implement the correct logic
+//        productsPage.verifySearchResultsAreRelevant(productName);
+        Assert.assertTrue(productsPage.isSearchResultsAreRelevant(productName));
     }
 
     @Then("verify user is on products page")

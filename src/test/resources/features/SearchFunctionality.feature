@@ -12,5 +12,5 @@ Feature: Validate Search Functionality for Products
 
     Examples:
       | product.name |
-      | T Shirt      |
+      | T-Shirt      |
       | Watch        |
