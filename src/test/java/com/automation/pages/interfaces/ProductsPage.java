@@ -5,7 +5,13 @@ public interface ProductsPage {
         
     }
 
+<<<<<<< HEAD
     boolean isProductPageDisplayed();
 
     void clickOnFirstProduct();
+=======
+    default void chooseFilters() {
+
+    }
+>>>>>>> fa25a005d1db2293d205aa05ee48259da8756ff1
 }
