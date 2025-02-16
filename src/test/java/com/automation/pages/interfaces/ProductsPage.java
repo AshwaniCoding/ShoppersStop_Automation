@@ -4,4 +4,8 @@ public interface ProductsPage {
     default void verifySearchResultsAreRelevant(String productName) {
         
     }
+
+    default void chooseFilters() {
+
+    }
 }

@@ -5,11 +5,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class ProductsPageSteps {
-    AndroidProductsPage androidProductsPage = new AndroidProductsPage();
+public class ProductsPageSteps extends BaseSteps{
     @And("user sets desired filters")
     public void userSetsDesiredFilters() {
-        androidProductsPage.chooseFilters();
+        productPage.chooseFilters();
     }
 
     @And("click on the first product")
@@ -22,6 +21,6 @@ public class ProductsPageSteps {
 
     @Then("verify the search results are relevant to {string}")
     public void verifyTheSearchResultsAreRelevantTo(String productName) {
-        androidProductsPage.verifySearchResultsAreRelevant(productName);
+        productPage.verifySearchResultsAreRelevant(productName);
     }
 }

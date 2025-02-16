@@ -11,6 +11,7 @@ Feature: Add Items to Wishlist Functionality
 
   Scenario: Verify user can add product to the wishlist
     When user search for a product "product.name"
+    Then clicks the search button
     And click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button
@@ -20,6 +21,7 @@ Feature: Add Items to Wishlist Functionality
 
   Scenario: Verify product is removed from wishlist when clicked twice
     When user search for a product "product.name"
+    Then clicks the search button
     And click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button

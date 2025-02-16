@@ -10,4 +10,8 @@ public interface HomePage {
     default void searchForProduct(String productName) {
 
     }
+
+    default void clickOnSearchButton() {
+
+    }
 }
