@@ -8,9 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AndroidLoginPage extends AndroidBasePage implements LoginPage {
 
-    @FindBy(xpath = "//android.widget.Button[@content-desc=\"LOGIN\"]")
-    WebElement loginButton;
-
     @FindBy(xpath = "//android.widget.EditText")
     WebElement phoneOrEmailInput;
 
@@ -28,7 +25,6 @@ public class AndroidLoginPage extends AndroidBasePage implements LoginPage {
 
     @Override
     public void loginWithPhoneOrEmail(String phoneOrEmail) {
-        loginButton.click();
         phoneOrEmailInput.click();
         phoneOrEmailInput.sendKeys(phoneOrEmail);
 

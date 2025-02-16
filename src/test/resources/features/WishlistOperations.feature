@@ -5,6 +5,7 @@ Feature: Add Items to Wishlist Functionality
     Given user open application or website
     Then verify user is on home page of application or website
     When user click on my account page link
+    And user click on login button
     And user login with a valid phone or email "phone.or.email"
     And enter the one time password
     Then verify user is successfully logged in the application or website
@@ -14,7 +15,7 @@ Feature: Add Items to Wishlist Functionality
     And click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button
-    Then verify a confirmation message "Product added to the wishlist." is displayed
+    Then verify a message "Product added to the wishlist." is displayed
     When user navigates to wishlist page
     Then verify the product appears in the wishlist
 
@@ -23,7 +24,7 @@ Feature: Add Items to Wishlist Functionality
     And click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button
-    Then verify a confirmation message "Product added to the wishlist." is displayed
+    Then verify a message "Product added to the wishlist." is displayed
     When user navigates to wishlist page
     Then verify the product appears in the wishlist
     When user navigates to the previous page

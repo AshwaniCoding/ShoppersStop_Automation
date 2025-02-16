@@ -7,7 +7,18 @@ public interface HomePage {
 
     void clickOnMyAccountLink();
 
-    default void searchForProduct(String productName) {
+    void searchForProduct(String productName);
 
+    void clickOnSearchBtn();
+
+    default void clickOnLoginBtn() {
     }
+
+    default boolean isUserLoggedOut() {
+        return false;
+    }
+
+    boolean isMessageDisplayed(String message);
+
+    void clickOnHomePageLink();
 }

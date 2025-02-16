@@ -47,7 +47,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
             Assert.assertTrue(applicationHeader.isDisplayed());
             Assert.assertTrue(applicationSubHeading.isDisplayed());
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("The home page of the application is not displayed");
             return false;
         }
@@ -62,12 +62,27 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     public void searchForProduct(String productName) {
 
         searchBar.click();
-        if(isDisplayed(skipPopUp)){
+        if (isDisplayed(skipPopUp)) {
             skipPopUp.click();
         }
         searchBarInput.sendKeys(productName);
-        WebElement suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
+        WebElement suggestedOption = driver.findElement(By.xpath(String.format(suggestion, productName)));
         suggestedOption.click();
         suggestedOption.click();
+    }
+
+    @Override
+    public void clickOnSearchBtn() {
+
+    }
+
+    @Override
+    public boolean isMessageDisplayed(String message) {
+        return false;
+    }
+
+    @Override
+    public void clickOnHomePageLink() {
+
     }
 }

@@ -53,4 +53,14 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
             Assert.assertTrue(we.getText().contains(productName));
         }
     }
+
+    @Override
+    public boolean isProductPageDisplayed() {
+        return false;
+    }
+
+    @Override
+    public void clickOnFirstProduct() {
+
+    }
 }

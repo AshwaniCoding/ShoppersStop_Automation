@@ -4,7 +4,8 @@ public interface MyAccountPage {
 
     boolean isUserLoggedIn();
 
-    default void clickOnLogoutButton() {
+    void clickOnLogoutButton();
 
+    default void clickOnLoginBtn() {
     }
 }

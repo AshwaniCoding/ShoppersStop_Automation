@@ -7,7 +7,7 @@ Feature: Validate Search Functionality for Products
 
   Scenario Outline: Test search functionality for products
     When user search for a product "<product.name>"
-    And clicks the search button
+    And user click on search button
     Then verify the search results are relevant to "<product.name>"
 
     Examples:

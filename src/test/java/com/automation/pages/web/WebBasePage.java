@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Set;
 
 public class WebBasePage {
 
@@ -77,6 +78,17 @@ public class WebBasePage {
 
     public void waitTillVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void switchToNewTab() {
+        String currentWindowHandle = driver.getWindowHandle();
+        Set<String> allWindowHandles = driver.getWindowHandles();
+
+        for (String handle : allWindowHandles) {
+            if (!handle.equals(currentWindowHandle)) {
+                driver.switchTo().window(handle);
+            }
+        }
     }
 
 }

@@ -7,12 +7,14 @@ Feature: Validate Login Functionality
 
   Scenario: Verify user can login with valid credentials
     When user click on my account page link
+    And user click on login button
     And user login with a valid phone or email "phone.or.email"
     And enter the one time password
     Then verify user is successfully logged in the application or website
 
   Scenario Outline: Verify user cannot login with invalid credentials
     When user click on my account page link
+    And user click on login button
     And user login with a valid phone or email "<phone-or-email>"
     Then verify user receives an error message indicating an invalid email or phone number
 
