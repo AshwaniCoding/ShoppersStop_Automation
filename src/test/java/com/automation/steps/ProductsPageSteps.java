@@ -14,8 +14,8 @@ public class ProductsPageSteps extends BaseSteps {
 
     }
 
-    @When("click on the first product")
-    public void clickOnTheFirstProduct() {
+    @When("user click on the first product")
+    public void userClickOnTheFirstProduct() {
         productsPage.clickOnFirstProduct();
     }
 

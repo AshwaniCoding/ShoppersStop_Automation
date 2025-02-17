@@ -12,7 +12,7 @@ Feature: Validate Cart Persistence Functionality
     When user search for a product "product.name"
     And user click on search button
     Then verify user is on products page
-    When click on the first product
+    When user click on the first product
     Then verify user is on product details page
     When user adds a product to the cart
     Then verify a message "Product added to your cart successfully" is displayed
