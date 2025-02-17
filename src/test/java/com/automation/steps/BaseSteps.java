@@ -9,7 +9,8 @@ public class BaseSteps {
 
     HomePage homePage;
     LoginPage loginPage;
-    ProductsPage productPage;
+    ProductsPage productsPage;
+    ProductDetailsPage productDetailsPage;
     MyAccountPage myAccountPage;
     CartPage cartPage;
     WishlistPage wishlistPage;
@@ -20,15 +21,17 @@ public class BaseSteps {
 
         if (System.getProperty("platform").equals("web")) {
             homePage = new WebHomePage();
-            productPage = new WebProductsPage();
+            productsPage = new WebProductsPage();
             loginPage = new WebLoginPage();
+            productDetailsPage = new WebProductDetailsPage();
             myAccountPage = new WebMyAccountPage();
             cartPage = new WebCartPage();
             wishlistPage = new WebWishlistPage();
         } else {
             homePage = new AndroidHomePage();
-            productPage = new AndroidProductsPage();
+            productsPage = new AndroidProductsPage();
             loginPage = new AndroidLoginPage();
+            productDetailsPage = new AndroidProductDetailsPage();
             myAccountPage = new AndroidMyAccountPage();
             cartPage = new AndroidCartPage();
             wishlistPage = new AndroidWishlistPage();

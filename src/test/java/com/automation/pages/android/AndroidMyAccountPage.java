@@ -10,6 +10,9 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
     @FindBy(xpath = "//android.view.View[contains(@content-desc,\"MANAGE YOUR PROFILE\")]")
     WebElement userDetails;
 
+    @FindBy(xpath = "//android.widget.Button[@content-desc=\"LOGIN\"]")
+    WebElement loginButton;
+
     @FindBy(xpath = "//android.view.View[@content-desc=\"LOGOUT\"]")
     WebElement logOutButton;
 
@@ -31,6 +34,11 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
         //logOutButton = driver.findElement(By.xpath("//android.view.View[@content-desc=\"LOGOUT\"]"));
 
         logOutButton.click();
+    }
+
+    @Override
+    public void clickOnLoginBtn() {
+        loginButton.click();
     }
 }
 

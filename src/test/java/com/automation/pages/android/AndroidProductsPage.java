@@ -49,8 +49,8 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     }
 
     @Override
-    public void clickOnTheFirstProduct() {
-        firstProduct.click();
+    public boolean isSearchResultsAreRelevant(String productName) {
+        return false;
     }
 
     @Override
@@ -61,4 +61,16 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
             Assert.assertTrue(we.getText().contains(productName));
         }
     }
+
+    @Override
+    public boolean isProductPageDisplayed() {
+        return false;
+    }
+
+    @Override
+    public void clickOnTheFirstProduct() {
+
+    }
+
+
 }

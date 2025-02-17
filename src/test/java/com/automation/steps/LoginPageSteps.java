@@ -22,5 +22,6 @@ public class LoginPageSteps extends BaseSteps {
 
     @When("user log in again with a valid phone or email {string}")
     public void userLogInAgainWithAValidPhoneOrEmail(String phoneOrEmail) {
+        loginPage.loginWithPhoneOrEmail(ConfigReader.getConfigValue(phoneOrEmail));
     }
 }

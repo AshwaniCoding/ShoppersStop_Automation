@@ -1,18 +1,18 @@
 package com.automation.pages.interfaces;
 
 public interface ProductDetailsPage {
+    boolean isProductDetailsPageDisplayed();
 
-    default void verifyUserIsOnProductDetailsPage() {
+    void clickOnAddToCartBtn();
 
-    }
+    void clickOnCartLink();
 
-    default void userClicksOnTheAddToWishlistButton() {
-
-    }
-
-    default void verifyAConfirmationMessageIsDisplayed() {
+    default void clickOnAddToWishlistButton() {
 
     }
+
+    void saveProductName();
+
 
     default void userNavigatesToWishlistPage() {
 
@@ -22,7 +22,4 @@ public interface ProductDetailsPage {
 
     }
 
-    default void verifyAMessageIsDisplayed() {
-
-    }
 }

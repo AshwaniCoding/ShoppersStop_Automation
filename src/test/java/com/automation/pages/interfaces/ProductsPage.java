@@ -5,11 +5,9 @@ public interface ProductsPage {
         
     }
 
-    default void chooseFilters() {
+    boolean isProductPageDisplayed();
 
-    }
+    void clickOnTheFirstProduct();
 
-    default void clickOnTheFirstProduct() {
-
-    }
+    boolean isSearchResultsAreRelevant(String productName);
 }

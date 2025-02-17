@@ -26,14 +26,28 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     WebElement confirmationMessage;
 
     @Override
-    public void verifyUserIsOnProductDetailsPage() {
-        Assert.assertTrue(productDetailsPage.isDisplayed());
-        Assert.assertTrue(productDetails.isDisplayed());
+    public boolean isProductDetailsPageDisplayed() {
+        return productDetailsPage.isDisplayed();
     }
 
     @Override
-    public void userClicksOnTheAddToWishlistButton() {
+    public void clickOnAddToCartBtn() {
+
+    }
+
+    @Override
+    public void clickOnCartLink() {
+
+    }
+
+    @Override
+    public void clickOnAddToWishlistButton() {
         addToWishListButton.click();
+    }
+
+    @Override
+    public void saveProductName() {
+
     }
 
     @Override
@@ -52,8 +66,4 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
         backButton.click();
     }
 
-    @Override
-    public void verifyAMessageIsDisplayed() {
-        // unable to find xpath for the floating message
-    }
 }

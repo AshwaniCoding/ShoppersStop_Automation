@@ -35,9 +35,6 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @FindBy(xpath = "//android.view.View[@content-desc=\"SKIP\"]")
     WebElement skipPopUp;
 
-    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"HOME, Tab 1 of 5\"]")
-    WebElement homeIcon;
-
     WebElement suggestedOption;
 
     @Override
@@ -65,13 +62,28 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public void searchForProduct(String productName) {
-        homeIcon.click();
+
+        searchBar.click();
         if(isDisplayed(skipPopUp)){
             skipPopUp.click();
         }
-        searchBar.click();
         searchBarInput.sendKeys(productName);
         suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
+    }
+
+    @Override
+    public boolean isUserLoggedOut() {
+        return false;
+    }
+
+    @Override
+    public boolean isMessageDisplayed(String message) {
+        return false;
+    }
+
+    @Override
+    public void clickOnHomePageLink() {
+
     }
 
     @Override
