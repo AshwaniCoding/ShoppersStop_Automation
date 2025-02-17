@@ -13,12 +13,7 @@ public interface HomePage {
 
     }
 
-    default void clickOnLoginBtn() {
-    }
-
     boolean isUserLoggedOut();
-
-    boolean isMessageDisplayed(String message);
 
     void clickOnHomePageLink();
 

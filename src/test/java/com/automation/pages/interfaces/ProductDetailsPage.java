@@ -14,11 +14,11 @@ public interface ProductDetailsPage {
     void saveProductName();
 
 
-    default void userNavigatesToWishlistPage() {
+    default void clickOnWishlistLink() {
 
     }
 
-    default void userNavigatesToThePreviousPage() {
+    default void navigateToPreviousPage() {
 
     }
 

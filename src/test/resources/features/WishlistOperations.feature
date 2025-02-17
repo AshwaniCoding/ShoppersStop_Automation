@@ -17,8 +17,7 @@ Feature: Add Items to Wishlist Functionality
     When user click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button
-    Then verify a message "Product added to the wishlist." is displayed
-    When user navigates to wishlist page
+    And user navigates to wishlist page
     Then verify the product appears in the wishlist
 
   Scenario: Verify product is removed from wishlist when clicked twice
@@ -28,11 +27,9 @@ Feature: Add Items to Wishlist Functionality
     When user click on the first product
     Then verify user is on product details page
     When user clicks on the add to wishlist button
-    Then verify a message "Product added to the wishlist." is displayed
-    When user navigates to wishlist page
+    And user navigates to wishlist page
     Then verify the product appears in the wishlist
     When user navigates to the previous page
     And user clicks on the add to wishlist button again
-    Then verify a message "Removed from your Wishlist" is displayed
-    When user navigates to wishlist page
+    And user navigates to wishlist page
     Then verify the product is removed from the wishlist

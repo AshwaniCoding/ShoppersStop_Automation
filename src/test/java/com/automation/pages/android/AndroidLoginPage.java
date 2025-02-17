@@ -35,13 +35,10 @@ public class AndroidLoginPage extends AndroidBasePage implements LoginPage {
 
     @Override
     public void enterOneTimePassword() {
-        setImplicitWait(30);
-        //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[@content-desc=\"VERIFY OTP\"]")));
         wait.until(ExpectedConditions.attributeToBe(verifyOtpButton, "clickable", "true"));
         while (isDisplayed(verifyOtpButton)) {
             verifyOtpButton.click();
         }
-        setImplicitWait(60);
     }
 
     @Override

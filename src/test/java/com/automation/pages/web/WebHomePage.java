@@ -13,7 +13,7 @@ public class WebHomePage extends WebBasePage implements HomePage {
     WebElement featuredTextElement;
 
     @FindBy(xpath = "//p[text()='Login']")
-    WebElement loginLinkElement;
+    public WebElement loginLinkElement;
 
     @FindBy(xpath = "//p[contains(text(),'Hello,')]")
     WebElement helloUserTextElement;
@@ -26,8 +26,6 @@ public class WebHomePage extends WebBasePage implements HomePage {
 
     @FindBy(xpath = "//a[@href='/home']")
     WebElement homePageLink;
-
-    String XPATH_MESSAGE = "//div[text()='%s']";
 
     @Override
     public void openApplication() {
@@ -59,19 +57,8 @@ public class WebHomePage extends WebBasePage implements HomePage {
     }
 
     @Override
-    public void clickOnLoginBtn() {
-        loginLinkElement.click();
-    }
-
-    @Override
     public boolean isUserLoggedOut() {
         return isDisplayed(loginLinkElement);
-    }
-
-    @Override
-    public boolean isMessageDisplayed(String message) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_MESSAGE, message)));
-        return isDisplayed(element);
     }
 
     @Override

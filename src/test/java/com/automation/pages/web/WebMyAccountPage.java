@@ -9,6 +9,9 @@ public class WebMyAccountPage extends WebBasePage implements MyAccountPage {
     @FindBy(xpath = "//p[contains(text(),'Hello,')]")
     WebElement helloUserTextElement;
 
+    @FindBy(xpath = "//p[text()='Login']")
+    WebElement loginLinkElement;
+
     @FindBy(xpath = "//div[text()='Logout']")
     WebElement logoutLink;
 
@@ -25,6 +28,11 @@ public class WebMyAccountPage extends WebBasePage implements MyAccountPage {
     public void clickOnLogoutButton() {
         logoutLink.click();
         yesLogoutBtn.click();
+    }
+
+    @Override
+    public void clickOnLoginBtn() {
+        loginLinkElement.click();
     }
 
 }

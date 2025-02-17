@@ -33,14 +33,5 @@ public class ProductDetailsSteps extends BaseSteps {
         Assert.assertTrue(homePage.isMessageDisplayed(message));
     }
 
-    @When("user navigates to wishlist page")
-    public void userNavigatesToWishlistPage() {
-        productDetailsPage.userNavigatesToWishlistPage();
-    }
-
-    @When("user navigates to the previous page")
-    public void userNavigatesToThePreviousPage() {
-        productDetailsPage.userNavigatesToThePreviousPage();
-    }
 
 }

@@ -1,6 +1,5 @@
 package com.automation.steps;
 
-import com.automation.pages.android.AndroidHomePage;
 import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -72,15 +71,16 @@ public class HomePageSteps extends BaseSteps {
 
     @When("user navigates to wishlist page")
     public void userNavigatesToWishlistPage() {
+        productDetailsPage.clickOnWishlistLink();
     }
 
     @When("user navigates to the previous page")
     public void userNavigatesToThePreviousPage() {
+        productDetailsPage.navigateToPreviousPage();
     }
 
     @And("user click on login button")
     public void userClickOnLoginButton() {
-        homePage.clickOnLoginBtn();
         myAccountPage.clickOnLoginBtn();
     }
 }

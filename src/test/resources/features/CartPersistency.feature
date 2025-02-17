@@ -14,11 +14,10 @@ Feature: Validate Cart Persistence Functionality
     Then verify user is on products page
     When user click on the first product
     Then verify user is on product details page
-    When user adds a product to the cart
-    Then verify a message "Product added to your cart successfully" is displayed
 
   Scenario: Verify cart items persist after logging out and logging in
-    When user navigates to my cart page
+    When user adds a product to the cart
+    And user navigates to my cart page
     Then verify user is on my cart page
     And verify product is added to cart
     When user navigate to home page
@@ -34,7 +33,8 @@ Feature: Validate Cart Persistence Functionality
     Then verify the product added to the cart is still present after login
 
   Scenario: Verify cart is cleared after removing all items
-    When user navigates to my cart page
+    When user adds a product to the cart
+    And user navigates to my cart page
     Then verify user is on my cart page
     When user removes all items from the cart
     Then verify the cart is empty

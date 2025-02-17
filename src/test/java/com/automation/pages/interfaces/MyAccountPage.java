@@ -6,6 +6,5 @@ public interface MyAccountPage {
 
     void clickOnLogoutButton();
 
-    default void clickOnLoginBtn() {
-    }
+    void clickOnLoginBtn();
 }

@@ -14,7 +14,7 @@ public class BaseSteps {
     MyAccountPage myAccountPage;
     CartPage cartPage;
     WishlistPage wishlistPage;
-    ProductDetailsPage productDetailsPage;
+
 
 
     public BaseSteps() {

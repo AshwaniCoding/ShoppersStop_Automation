@@ -71,13 +71,10 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
         suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
     }
 
-    @Override
-    public boolean isUserLoggedOut() {
-        return false;
-    }
+
 
     @Override
-    public boolean isMessageDisplayed(String message) {
+    public boolean isUserLoggedOut() {
         return false;
     }
 

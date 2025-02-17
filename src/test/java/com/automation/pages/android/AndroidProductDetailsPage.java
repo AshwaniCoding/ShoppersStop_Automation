@@ -19,12 +19,6 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     @FindBy(xpath = "//android.widget.ScrollView/android.view.View[1]/following-sibling::android.view.View")
     public static WebElement productDetails;
 
-    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]//android.widget.FrameLayout//android.view.View//android.view.View[2]/android.view.View[1]")
-    WebElement backButton;
-
-    @FindBy(xpath = "//android.widget.Toast[@text=\"Product is added to the wishlist.\"]")
-    WebElement confirmationMessage;
-
     @Override
     public boolean isProductDetailsPageDisplayed() {
         return productDetailsPage.isDisplayed();
@@ -51,19 +45,13 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     }
 
     @Override
-    public void verifyAConfirmationMessageIsDisplayed() {
-        // unable to find xpath for the floating message
-        confirmationMessage.isDisplayed();
-    }
-
-    @Override
-    public void userNavigatesToWishlistPage() {
+    public void clickOnWishlistLink() {
         myWishlistIcon.click();
     }
 
     @Override
-    public void userNavigatesToThePreviousPage() {
-        backButton.click();
+    public void navigateToPreviousPage() {
+        driver.navigate().back();
     }
 
 }
