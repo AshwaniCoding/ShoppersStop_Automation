@@ -26,6 +26,9 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     @FindBy(xpath = "//android.view.View[@content-desc and @class=\"android.view.View\"]")
     List<WebElement> productNames2;
 
+    @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]//android.widget.FrameLayout/android.view.View//android.view.View/android.view.View[3]//android.view.View[3]/android.view.View/android.view.View/android.view.View[1]/android.view.View")
+    WebElement firstProduct;
+
     public void chooseFilters() {
         chooseFilterBtn.click();
         List<String> list = ConfigReader.getPropertyByPartialKey("filter");
@@ -43,6 +46,11 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
         }
         showItemsButton.click();
 
+    }
+
+    @Override
+    public void clickOnTheFirstProduct() {
+        firstProduct.click();
     }
 
     @Override

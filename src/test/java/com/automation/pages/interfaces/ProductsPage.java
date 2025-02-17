@@ -8,4 +8,8 @@ public interface ProductsPage {
     default void chooseFilters() {
 
     }
+
+    default void clickOnTheFirstProduct() {
+
+    }
 }

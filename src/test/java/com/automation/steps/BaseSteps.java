@@ -13,6 +13,7 @@ public class BaseSteps {
     MyAccountPage myAccountPage;
     CartPage cartPage;
     WishlistPage wishlistPage;
+    ProductDetailsPage productDetailsPage;
 
 
     public BaseSteps() {
@@ -31,6 +32,7 @@ public class BaseSteps {
             myAccountPage = new AndroidMyAccountPage();
             cartPage = new AndroidCartPage();
             wishlistPage = new AndroidWishlistPage();
+            productDetailsPage = new AndroidProductDetailsPage();
         }
     }
 

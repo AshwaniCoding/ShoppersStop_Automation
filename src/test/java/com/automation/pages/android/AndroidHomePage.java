@@ -22,7 +22,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View/android.widget.ImageView[1]")
     WebElement applicationHeader;
 
-    @FindBy(xpath = "//android.view.View[contains(@content-desc='Hello')")
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Hello')]")
     WebElement applicationSubHeading;
 
     String updatedSearchBar = "//android.widget.ImageView[@text='%s']";
@@ -34,6 +34,9 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @FindBy(xpath = "//android.view.View[@content-desc=\"SKIP\"]")
     WebElement skipPopUp;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"HOME, Tab 1 of 5\"]")
+    WebElement homeIcon;
 
     WebElement suggestedOption;
 
@@ -62,11 +65,11 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public void searchForProduct(String productName) {
-
-        searchBar.click();
+        homeIcon.click();
         if(isDisplayed(skipPopUp)){
             skipPopUp.click();
         }
+        searchBar.click();
         searchBarInput.sendKeys(productName);
         suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
     }

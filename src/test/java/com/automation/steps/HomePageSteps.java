@@ -62,11 +62,5 @@ public class HomePageSteps extends BaseSteps {
         homePage.searchForProduct(productName);
     }
 
-    @When("user navigates to wishlist page")
-    public void userNavigatesToWishlistPage() {
-    }
 
-    @When("user navigates to the previous page")
-    public void userNavigatesToThePreviousPage() {
-    }
 }

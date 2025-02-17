@@ -13,6 +13,7 @@ public class ProductsPageSteps extends BaseSteps{
 
     @And("click on the first product")
     public void clickOnTheFirstProduct() {
+        productPage.clickOnTheFirstProduct();
     }
 
     @When("user adds multiple products to the cart")

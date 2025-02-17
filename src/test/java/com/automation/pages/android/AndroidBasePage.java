@@ -24,6 +24,8 @@ public class AndroidBasePage {
     WebDriver driver;
     WebDriverWait wait;
 
+
+
     public AndroidBasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);

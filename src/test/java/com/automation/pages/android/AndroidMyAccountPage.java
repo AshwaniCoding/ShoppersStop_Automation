@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPage {
 
-    @FindBy(xpath = "//android.view.View[contains(@content-desc,\"MANAGE YOUR PROFILE\")]/android.widget.ImageView[contains(@content-desc,\"Srinivas\")]")
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,\"MANAGE YOUR PROFILE\")]")
     WebElement userDetails;
 
     @FindBy(xpath = "//android.view.View[@content-desc=\"LOGOUT\"]")
@@ -22,12 +22,15 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
     @Override
     public void clickOnLogoutButton() {
 //        int x = driver.manage().window().getSize().getWidth()/2;
-        int y1=driver.manage().window().getSize().getHeight();
+        int y1 = driver.manage().window().getSize().getHeight();
 //        int y2 = driver.manage().window().getSize().getHeight();
-        while (!isDisplayed(logOutButton) && !(logOutButton.getLocation().getY() <y1)){
+        while (!isDisplayed(logOutButton)) {
             scrollDown();
-            logOutButton = driver.findElement(By.xpath("//android.view.View[@content-desc=\"LOGOUT\"]"));
+            System.out.println("isdisplayed>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         }
+        //logOutButton = driver.findElement(By.xpath("//android.view.View[@content-desc=\"LOGOUT\"]"));
+
         logOutButton.click();
     }
 }
+
