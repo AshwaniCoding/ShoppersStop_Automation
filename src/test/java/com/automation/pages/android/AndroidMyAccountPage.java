@@ -18,21 +18,15 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
 
     @Override
     public boolean isUserLoggedIn() {
-        pause(20000);
+        pause(5);
         return isDisplayed(userDetails);
     }
 
     @Override
     public void clickOnLogoutButton() {
-//        int x = driver.manage().window().getSize().getWidth()/2;
-        int y1 = driver.manage().window().getSize().getHeight();
-//        int y2 = driver.manage().window().getSize().getHeight();
         while (!isDisplayed(logOutButton)) {
-            scrollDown();
-            System.out.println("isdisplayed>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            scrollPage();
         }
-        //logOutButton = driver.findElement(By.xpath("//android.view.View[@content-desc=\"LOGOUT\"]"));
-
         logOutButton.click();
     }
 

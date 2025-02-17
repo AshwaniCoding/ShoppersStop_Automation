@@ -25,7 +25,6 @@ public class AndroidBasePage {
     WebDriverWait wait;
 
 
-
     public AndroidBasePage() {
         driver = DriverManager.getDriver();
         PageFactory.initElements(driver, this);
@@ -57,9 +56,9 @@ public class AndroidBasePage {
         }
     }
 
-    public void pause(long milliSec) {
+    public void pause(int seconds) {
         try {
-            Thread.sleep(milliSec);
+            Thread.sleep(seconds);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -67,20 +66,20 @@ public class AndroidBasePage {
 
     public boolean isDisplayed(WebElement element) {
         try {
-            setImplicitWait(5000);
+            setImplicitWait(5);
             return element.isDisplayed();
         } catch (Exception e) {
             return false;
         } finally {
-            setImplicitWait(60000);
+            setImplicitWait(60);
         }
     }
 
-    public void setImplicitWait(int sec) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(sec));
+    public void setImplicitWait(int seconds) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }
 
-    public void scrollDown() {
+    public void scrollPage() {
 
         Dimension dimension = driver.manage().window().getSize();
         int width = dimension.getWidth();
@@ -89,7 +88,6 @@ public class AndroidBasePage {
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width / 2, height / 2))
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(new Pause(finger1, Duration.ofSeconds(2)))
                 .addAction(finger1.createPointerMove(Duration.ofSeconds(4), PointerInput.Origin.viewport(), width / 2, 0))
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
