@@ -12,3 +12,8 @@ Feature: Validate Profile Update Functionality
 
   Scenario: User successfully updates their profile
     When user click on my account page link
+    And click on edit profile button
+    Then verify user is on edit profile page
+    When user update name "profile.updated.name" and gender "profile.gender"
+    And click on update changes button
+    Then verify profile is updated with name "profile.updated.name" and gender "profile.gender"
