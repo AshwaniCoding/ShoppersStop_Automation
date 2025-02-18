@@ -2,6 +2,8 @@ package com.automation.pages.android;
 
 import com.automation.pages.interfaces.HomePage;
 import com.automation.utils.ConfigReader;
+import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.android.AndroidDriver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -49,7 +51,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
             Assert.assertTrue(applicationHeader.isDisplayed());
             Assert.assertTrue(applicationSubHeading.isDisplayed());
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("The home page of the application is not displayed");
             return false;
         }
@@ -64,14 +66,16 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     public void searchForProduct(String productName) {
 
         searchBar.click();
-        if(isDisplayed(skipPopUp)){
+        if (isDisplayed(skipPopUp)) {
             skipPopUp.click();
         }
         searchBarInput.sendKeys(productName);
-        suggestedOption = driver.findElement(By.xpath(String.format(suggestion,productName)));
     }
 
-
+    @Override
+    public void clickOnSearchBtn() {
+        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
+    }
 
     @Override
     public boolean isUserLoggedOut() {

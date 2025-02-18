@@ -9,9 +9,7 @@ public interface HomePage {
 
     void searchForProduct(String productName);
 
-    default void clickOnSearchBtn() {
-
-    }
+    void clickOnSearchBtn();
 
     boolean isUserLoggedOut();
 
