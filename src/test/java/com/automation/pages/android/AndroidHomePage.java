@@ -34,13 +34,10 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"ACCOUNT, Tab 5 of 5\"]")
     WebElement myAccountElement;
 
-    @FindBy(xpath = "//android.view.View[@content-desc=\"SKIP\"]")
+    @FindBy(xpath = "//android.view.View[@content-desc='SKIP']")
     WebElement skipPopUp;
 
     WebElement suggestedOption;
-
-    @FindBy(xpath = "//android.view.View[@content-desc='My Bag']/preceding-sibling::android.widget.ImageView")
-    WebElement homePageLink;
 
     @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'HOME')]")
     WebElement homeLink;
@@ -52,7 +49,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public boolean isHomePageDisplayed() {
-        return isDisplayed(applicationHeader);
+        return homeLink.getAttribute("selected").equals("true");
     }
 
     @Override
@@ -66,17 +63,20 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
         if (isDisplayed(homeLink)) {
             homeLink.click();
         }
-
         searchBar.click();
-        if(isDisplayed(skipPopUp)){
-            skipPopUp.click();
-        }
+
+        System.out.println("Before randoCLicl1");
+        randomClick();
+        System.out.println("After random click1");
+        searchBarInput.click();
         searchBarInput.sendKeys(productName);
     }
 
     @Override
     public void clickOnSearchBtn() {
+        pause(5);
         ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
+        pause(5);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public void clickOnHomePageLink() {
-
+        navigateBack(homeLink);
     }
 
     @Override

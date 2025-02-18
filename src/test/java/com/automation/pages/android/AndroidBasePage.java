@@ -1,7 +1,10 @@
 package com.automation.pages.android;
 
 import com.automation.utils.DriverManager;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -98,6 +101,24 @@ public class AndroidBasePage {
         while (!isDisplayed(element)) {
             driver.navigate().back();
         }
+    }
+
+    public void randomClick(){
+        Dimension dimension = driver.manage().window().getSize();
+        int width = dimension.getWidth();
+        int height = dimension.getHeight();
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+
+        // Create a sequence of actions for the click
+        Sequence sequence = new Sequence(finger, 1)
+                .addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width/2, height/2))
+                .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                .addAction(new Pause(finger, Duration.ofMillis(100))) // Add a short pause to simulate a real touch
+                .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        // Perform the sequence using AndroidDriver (assuming you have an instance of it)
+        ((AppiumDriver) driver).perform(Collections.singletonList(sequence));
     }
 
 }

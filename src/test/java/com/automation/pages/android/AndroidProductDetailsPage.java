@@ -22,7 +22,7 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     @FindBy(xpath = "//android.widget.ImageView[@content-desc='ADD TO BAG']")
     WebElement addToBagBtn;
 
-    @FindBy(xpath = "//android.widget.ScrollView/android.widget.ImageView[4]")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"What are you looking for?\"]/preceding-sibling::android.widget.ImageView[4]")
     WebElement cartLink;
 
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'added to bag')]/android.widget.ImageView[1]")
