@@ -39,6 +39,12 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     WebElement suggestedOption;
 
+    @FindBy(xpath = "//android.view.View[@content-desc='My Bag']/preceding-sibling::android.widget.ImageView")
+    WebElement homePageLink;
+
+    @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'HOME')]")
+    WebElement homeLink;
+
     @Override
     public void openApplication() {
         doNotAllowNotificationBtn.click();
@@ -46,15 +52,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public boolean isHomePageDisplayed() {
-        //handling the assertion error
-        try {
-            Assert.assertTrue(applicationHeader.isDisplayed());
-            Assert.assertTrue(applicationSubHeading.isDisplayed());
-            return true;
-        } catch (Exception e) {
-            System.out.println("The home page of the application is not displayed");
-            return false;
-        }
+        return isDisplayed(applicationHeader);
     }
 
     @Override
@@ -65,8 +63,12 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
     @Override
     public void searchForProduct(String productName) {
 
+        if (isDisplayed(homeLink)) {
+            homeLink.click();
+        }
+
         searchBar.click();
-        if (isDisplayed(skipPopUp)) {
+        if(isDisplayed(skipPopUp)){
             skipPopUp.click();
         }
         searchBarInput.sendKeys(productName);

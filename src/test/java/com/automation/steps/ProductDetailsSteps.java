@@ -28,9 +28,5 @@ public class ProductDetailsSteps extends BaseSteps {
 
     }
 
-    @Then("verify a message {string} is displayed")
-    public void verifyAMessageIsDisplayed(String message) {
-    }
-
 
 }
