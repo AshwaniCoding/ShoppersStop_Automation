@@ -19,7 +19,7 @@ public class DriverManager {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("platformName", ConfigReader.getConfigValue("platform.name"));
             capabilities.setCapability("automationName", ConfigReader.getConfigValue("automation.name"));
-            //capabilities.setCapability("app", System.getProperty("user.dir") + ConfigReader.getConfigValue("apk.file.path"));
+            capabilities.setCapability("app", System.getProperty("user.dir") + ConfigReader.getConfigValue("apk.file.path"));
             capabilities.setCapability("deviceName", ConfigReader.getConfigValue("device.name"));
             capabilities.setCapability("appPackage", ConfigReader.getConfigValue("app.package"));
             capabilities.setCapability("appActivity", ConfigReader.getConfigValue("app.activity"));

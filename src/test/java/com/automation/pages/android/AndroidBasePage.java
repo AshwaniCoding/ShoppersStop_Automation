@@ -94,4 +94,10 @@ public class AndroidBasePage {
         ((AndroidDriver) driver).perform(Collections.singletonList(sequence));
     }
 
+    public void navigateBack(WebElement element) {
+        while (!isDisplayed(element)) {
+            driver.navigate().back();
+        }
+    }
+
 }
