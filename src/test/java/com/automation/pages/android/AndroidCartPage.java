@@ -19,6 +19,14 @@ public class AndroidCartPage extends AndroidBasePage implements CartPage {
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'₹ ')]")
     List<WebElement> productsInCart;
 
+    @FindBy(xpath = "//android.widget.ScrollView/android.view.View[3]/android.view.View/android.view.View[@content-desc]")
+    List<WebElement> itemsInCart;
+
+    @FindBy(xpath = "//android.widget.ScrollView/android.view.View[3]/android.view.View/android.view.View[@content-desc]/android.widget.ImageView[2]")
+    WebElement removeItemBtn;
+
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,'bag is empty')]")
+    WebElement cartIsEmptyMessage;
     @Override
     public boolean isCartPageDisplayed() {
         return isDisplayed(myBagTextElement);
@@ -45,12 +53,15 @@ public class AndroidCartPage extends AndroidBasePage implements CartPage {
 
     @Override
     public void removeAllItems() {
+        for(WebElement item : itemsInCart){
+            removeItemBtn.click();
+        }
 
     }
 
     @Override
     public boolean isCartEmpty() {
-        return false;
+        return isDisplayed(cartIsEmptyMessage);
     }
 
 }

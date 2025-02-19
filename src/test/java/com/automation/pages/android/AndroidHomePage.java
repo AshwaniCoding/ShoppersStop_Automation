@@ -74,14 +74,20 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public void clickOnSearchBtn() {
-        pause(5);
-        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
-        pause(5);
+//        suggestedOption.click();
+//        suggestedOption.click();
+          ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
     }
+//    @Override
+//    public void clickOnSearchBtn() {
+//        pause(5);
+//        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
+//        pause(5);
+//    }
 
     @Override
     public boolean isUserLoggedOut() {
-        return false;
+        return homeLink.getAttribute("selected").equals("true");
     }
 
     @Override
@@ -89,13 +95,6 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
         navigateBack(homeLink);
     }
 
-    @Override
-    public void clickOnSearchButton() {
-//        while(isDisplayed(suggestedOption)){
-//            suggestedOption.click();
-//        }
 
-        suggestedOption.click();
-        suggestedOption.click();
-    }
 }
+

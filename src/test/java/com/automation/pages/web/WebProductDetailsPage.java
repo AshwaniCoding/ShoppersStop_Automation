@@ -28,6 +28,14 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
     @FindBy(xpath = "//img[@alt='shopping-cart']")
     WebElement cartLink;
 
+    @FindBy(xpath = "//button[contains(@class,'inline-flex')]")
+    WebElement addToWishlistLink;
+
+    @FindBy(xpath = "//img[@alt='pdp_wishlist_add']/following-sibling::p[contains(@class,'action-text')]")
+    WebElement updatedAddToWishlist;
+
+    @FindBy(xpath = "//img[@alt='wish-list']")
+    WebElement wishlistPageLink;
 
     @Override
     public boolean isProductDetailsPageDisplayed() {
@@ -38,6 +46,7 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
 
     @Override
     public void clickOnAddToCartBtn() {
+
         addToBagBtn.click();
     }
 
@@ -51,9 +60,31 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
     }
 
     @Override
+    public void clickOnAddToWishlistButton() {
+        if(isDisplayed(addToWishlistLink)){
+            addToWishlistLink.click();
+        }else{
+            updatedAddToWishlist.click();
+        }
+    }
+
+    @Override
     public void saveProductName() {
         ConfigReader.setConfigValue("product.company", productCompanyName.getText());
         ConfigReader.setConfigValue("product.title", productName.getText());
     }
+
+    @Override
+    public void clickOnWishlistLink() {
+        wishlistPageLink.click();
+    }
+
+    @Override
+    public void navigateToPreviousPage() {
+        driver.navigate().back();
+    }
+
+
+
 
 }

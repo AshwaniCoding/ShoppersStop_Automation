@@ -7,19 +7,12 @@ public interface ProductDetailsPage {
 
     void clickOnCartLink();
 
-    default void clickOnAddToWishlistButton() {
-
-    }
+    void clickOnAddToWishlistButton();
 
     void saveProductName();
 
 
-    default void clickOnWishlistLink() {
+    void clickOnWishlistLink();
 
-    }
-
-    default void navigateToPreviousPage() {
-
-    }
-
+    void navigateToPreviousPage();
 }

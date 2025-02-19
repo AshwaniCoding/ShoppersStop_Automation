@@ -25,7 +25,7 @@ public class ProductDetailsSteps extends BaseSteps {
 
     @And("user clicks on the add to wishlist button again")
     public void userClicksOnTheAddToWishlistButtonAgain() {
-
+        productDetailsPage.clickOnAddToWishlistButton();
     }
 
 
