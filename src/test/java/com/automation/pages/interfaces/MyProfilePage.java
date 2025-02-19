@@ -7,7 +7,7 @@ public interface MyProfilePage {
 
     boolean isAddAddressSectionDisplayed();
 
-    void clickOnEditAddressLink();
+    void clickOnEditAddressLink(String name);
 
     boolean isEditAddressSectionDisplayed();
 
@@ -22,4 +22,10 @@ public interface MyProfilePage {
     void clickOnConfirmBtn();
 
     boolean isAddressDeleted(String name);
+
+    void clickOnUpdateChangesBtn();
+
+    void updateAddressDetails();
+
+    boolean isAddressUpdated();
 }

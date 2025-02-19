@@ -69,7 +69,7 @@ public class AndroidBasePage {
 
     public boolean isDisplayed(WebElement element) {
         try {
-            setImplicitWait(5);
+            setImplicitWait(3);
             return element.isDisplayed();
         } catch (Exception e) {
             return false;
@@ -91,7 +91,7 @@ public class AndroidBasePage {
         Sequence sequence = new Sequence(finger1, 1)
                 .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width / 2, height / 2))
                 .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
-                .addAction(finger1.createPointerMove(Duration.ofSeconds(4), PointerInput.Origin.viewport(), width / 2, 0))
+                .addAction(finger1.createPointerMove(Duration.ofSeconds(2), PointerInput.Origin.viewport(), width / 2, 0))
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         ((AndroidDriver) driver).perform(Collections.singletonList(sequence));
@@ -103,7 +103,7 @@ public class AndroidBasePage {
         }
     }
 
-    public void randomClick(){
+    public void randomClick() {
         Dimension dimension = driver.manage().window().getSize();
         int width = dimension.getWidth();
         int height = dimension.getHeight();
@@ -112,13 +112,28 @@ public class AndroidBasePage {
 
         // Create a sequence of actions for the click
         Sequence sequence = new Sequence(finger, 1)
-                .addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width/2, height/2))
+                .addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width / 2, height / 2))
                 .addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
                 .addAction(new Pause(finger, Duration.ofMillis(100))) // Add a short pause to simulate a real touch
                 .addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         // Perform the sequence using AndroidDriver (assuming you have an instance of it)
         ((AppiumDriver) driver).perform(Collections.singletonList(sequence));
+    }
+
+    public void scrollPageDown() {
+
+        Dimension dimension = driver.manage().window().getSize();
+        int width = dimension.getWidth();
+        int height = dimension.getHeight();
+        PointerInput finger1 = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+        Sequence sequence = new Sequence(finger1, 1)
+                .addAction(finger1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), width / 2, height / 2))
+                .addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                .addAction(finger1.createPointerMove(Duration.ofSeconds(2), PointerInput.Origin.viewport(), width / 2, height))
+                .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        ((AndroidDriver) driver).perform(Collections.singletonList(sequence));
     }
 
 }
