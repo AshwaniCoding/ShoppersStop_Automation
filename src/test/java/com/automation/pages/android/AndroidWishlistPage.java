@@ -14,13 +14,13 @@ public class AndroidWishlistPage extends AndroidBasePage  implements WishlistPag
     WebElement productDetailsName;
 
     @Override
-    public void verifyTheProductAppearsInTheWishlist() {
+    public boolean verifyTheProductAppearsInTheWishlist() {
         //productDetailsName = driver.findElement(By.xpath(String.format(productName,subString)));
-        Assert.assertTrue(productDetails.isDisplayed());
+        return productDetails.isDisplayed();
     }
 
     @Override
-    public void verifyTheProductIsRemovedFromTheWishlist() {
-        Assert.assertFalse(isDisplayed(productDetails));
+    public boolean verifyTheProductIsRemovedFromTheWishlist() {
+        return isDisplayed(productDetails);
     }
 }

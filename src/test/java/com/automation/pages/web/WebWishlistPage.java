@@ -16,15 +16,13 @@ public class WebWishlistPage extends WebBasePage implements WishlistPage {
     String baseXpath = "//*[contains(text(),'%s')]";
 
     @Override
-    public void verifyTheProductAppearsInTheWishlist() {
-        //isDisplayed(WebProductDetailsPage.productName);
+    public boolean verifyTheProductAppearsInTheWishlist() {
         WebElement productInWishListDetails = driver.findElement(By.xpath(String.format(baseXpath, ConfigReader.getConfigValue("product.title"))));
-        Assert.assertTrue(isDisplayed(productInWishListDetails));
+        return isDisplayed(productInWishListDetails);
     }
 
     @Override
-    public void verifyTheProductIsRemovedFromTheWishlist() {
-        //isDisplayed(emptyWishListMessage);
-        Assert.assertTrue(isDisplayed(emptyWishListMessage));
+    public boolean verifyTheProductIsRemovedFromTheWishlist() {
+        return isDisplayed(emptyWishListMessage);
     }
 }
