@@ -7,4 +7,6 @@ public interface MyAccountPage {
     void clickOnLogoutButton();
 
     void clickOnLoginBtn();
+
+    default void clickOnMyProfileLink(){}
 }

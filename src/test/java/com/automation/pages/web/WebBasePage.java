@@ -72,6 +72,10 @@ public class WebBasePage {
         actions.moveToElement(element).build().perform();
     }
 
+    public void scrollToElement(WebElement element) {
+        executor.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
     public void waitTillClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
