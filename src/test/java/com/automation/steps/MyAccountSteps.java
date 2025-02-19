@@ -7,4 +7,9 @@ public class MyAccountSteps extends BaseSteps{
     public void clickOnLogoutButton() {
         myAccountPage.clickOnLogoutButton();
     }
+
+    @And("click on my profile link")
+    public void clickOnMyProfileLink() {
+        myAccountPage.clickOnMyProfileLink();
+    }
 }

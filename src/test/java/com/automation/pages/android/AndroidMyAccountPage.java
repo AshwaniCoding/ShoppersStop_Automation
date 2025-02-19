@@ -38,5 +38,10 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
     public void clickOnLoginBtn() {
         loginButton.click();
     }
+
+    @Override
+    public void clickOnMyProfileLink(){
+
+    }
 }
 

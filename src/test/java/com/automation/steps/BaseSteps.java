@@ -14,6 +14,7 @@ public class BaseSteps {
     MyAccountPage myAccountPage;
     CartPage cartPage;
     WishlistPage wishlistPage;
+    MyProfilePage myProfilePage;
 
 
 
@@ -27,6 +28,7 @@ public class BaseSteps {
             myAccountPage = new WebMyAccountPage();
             cartPage = new WebCartPage();
             wishlistPage = new WebWishlistPage();
+            myProfilePage = new WebMyProfilePage();
         } else {
             homePage = new AndroidHomePage();
             productsPage = new AndroidProductsPage();
@@ -36,6 +38,7 @@ public class BaseSteps {
             cartPage = new AndroidCartPage();
             wishlistPage = new AndroidWishlistPage();
             productDetailsPage = new AndroidProductDetailsPage();
+            myProfilePage = new AndroidMyProfilePage();
         }
     }
 
