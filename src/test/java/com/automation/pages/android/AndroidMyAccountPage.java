@@ -33,8 +33,11 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
         while (!isDisplayed(logOutButton)) {
             scrollPage();
         }
-        logOutButton.click();
-        yesLogoutBtn.click();
+
+        while (isDisplayed(logOutButton)) {
+            logOutButton.click();
+            yesLogoutBtn.click();
+        }
     }
 
     @Override

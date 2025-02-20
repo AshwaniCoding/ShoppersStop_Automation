@@ -53,7 +53,7 @@ public class WebHomePage extends WebBasePage implements HomePage {
 
     @Override
     public void clickOnSearchBtn() {
-        searchInput.sendKeys(Keys.ENTER);
+        actions.sendKeys(Keys.ENTER).build().perform();
     }
 
     @Override

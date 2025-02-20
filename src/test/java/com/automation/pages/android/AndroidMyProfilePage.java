@@ -46,7 +46,10 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'Phone: +91')]")
     WebElement firstAddress;
 
-    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Phone: +91')]")
+//    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Phone: +91')]")
+//    List<WebElement> addressList;
+
+    @FindBy(xpath = "//*[contains(@content-desc,'Phone: +91')]")
     List<WebElement> addressList;
 
     @FindBy(xpath = "//android.view.View[@content-desc='Show More']")
@@ -55,7 +58,10 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @FindBy(xpath = "//android.view.View[@content-desc='Show Less']")
     WebElement showLessBtn;
 
-    @FindBy(xpath = "//android.view.View[@content-desc='Edit']")
+//    @FindBy(xpath = "//android.view.View[@content-desc='Edit']")
+//    List<WebElement> editBtnList;
+
+    @FindBy(xpath = "//*[contains(@content-desc,'Phone: +91')]//android.view.View[@content-desc='Edit']")
     List<WebElement> editBtnList;
 
     @FindBy(xpath = "//android.view.View[@content-desc='EDIT ADDRESS']")
@@ -67,7 +73,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'Gender')]/android.view.View[@content-desc='Edit']")
     WebElement editProfileLink;
 
-    @FindBy(xpath = "//android.view.View[@content-desc='Delete']")
+    @FindBy(xpath = "//*[contains(@content-desc,'Phone: +91')]//android.view.View[@content-desc='Delete']")
     List<WebElement> deleteBtnList;
 
     @FindBy(xpath = "//android.view.View[@content-desc='CONFIRM']")
@@ -75,6 +81,10 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
     @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'My Profile')]")
     WebElement myProfileLink;
+
+    WebElement editAddressElement;
+
+    String XPATH_RELATIVE_EDIT_ADDRESS = "//*[contains(@content-desc,'%s')]/android.view.View[@content-desc='Edit']";
 
     @Override
     public boolean isMyProfilePageDisplayed() {
@@ -94,48 +104,26 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @Override
     public void clickOnEditAddressLink(String name) {
 
-        String address = firstAddress.getAttribute("content-desc");
-        if (address.toLowerCase().contains(name.toLowerCase())) {
-            editBtnList.get(1).click();
-        }
+        while (true) {
 
-        if (isDisplayed(addAddressLink)) {
-
-            for (int i = 0; i < addressList.size(); i++) {
-                address = addressList.get(i).getAttribute("content-desc");
-                if (address.toLowerCase().contains(name.toLowerCase())) {
-                    if (editBtnList.size() >= i + 1) {
-                        editBtnList.get(i + 1).click();
-                        return;
-                    }
+            for (int i = 0; i < editBtnList.size(); i++) {
+                String address = addressList.get(i).getAttribute("content-desc");
+                if (address.contains(name) && isDisplayed(editBtnList.get(i))) {
+                    System.out.println(">>>Before click");
+                    editBtnList.get(i).click();
+                    System.out.println(">>>After click");
+                    return;
                 }
             }
-
             scrollPage();
-            addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
-            editBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Edit']"));
-
             if (isDisplayed(showMoreBtn)) {
                 showMoreBtn.click();
-
-                while (!isDisplayed(showLessBtn)) {
-
-                    for (int i = 0; i < addressList.size(); i++) {
-                        address = addressList.get(i).getAttribute("content-desc");
-                        if (address.toLowerCase().contains(name.toLowerCase())) {
-                            if (editBtnList.size() >= i + 1) {
-                                editBtnList.get(i + 1).click();
-                                return;
-                            }
-                        }
-                    }
-
-                    scrollPage();
-                    addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
-                    editBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Edit']"));
-                }
             }
+            addressList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]"));
+            editBtnList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]//android.view.View[@content-desc='Edit']"));
+
         }
+
     }
 
     @Override
@@ -253,31 +241,21 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
         ConfigReader.setConfigValue("address.count.by.name", String.valueOf(addressCountByName(name)));
 
-        String address = firstAddress.getAttribute("content-desc");
-        if (address.toLowerCase().contains(name.toLowerCase())) {
-            deleteBtnList.getFirst().click();
-        }
+        while (true) {
 
-        if (isDisplayed(addAddressLink)) {
-
-
-            do {
-
-                for (int i = 0; i < addressList.size(); i++) {
-                    address = addressList.get(i).getAttribute("content-desc");
-                    if (address.toLowerCase().contains(name.toLowerCase())) {
-                        if (deleteBtnList.size() >= i + 1) {
-                            deleteBtnList.get(i + 1).click();
-                            return;
-                        }
-                    }
+            for (int i = 0; i < deleteBtnList.size(); i++) {
+                String address = addressList.get(i).getAttribute("content-desc");
+                if (address.contains(name) && isDisplayed(deleteBtnList.get(i))) {
+                    deleteBtnList.get(i).click();
+                    return;
                 }
-
-                scrollPage();
-                addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
-                deleteBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Delete']"));
-            } while (!isDisplayed(showLessBtn));
-
+            }
+            scrollPage();
+            if (isDisplayed(showMoreBtn)) {
+                showMoreBtn.click();
+            }
+            addressList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]"));
+            editBtnList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]//android.view.View[@content-desc='Edit']"));
 
         }
 
@@ -329,6 +307,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
                 radioButtons.getFirst().click();
             }
         }
+        clickOnKeyboardDoneBtn();
 
     }
 
@@ -348,7 +327,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         myProfileLink.click();
 
         scrollPage();
-        addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+        addressList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]"));
 
         if (isFieldUpdated(fieldsToCheck, addressList)) {
             return true;
@@ -432,8 +411,8 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
     private void updateField(WebElement element, String value) {
         if (value != null && !value.trim().isEmpty()) {
-            element.clear();
             element.click();
+            element.clear();
             element.sendKeys(value);
         }
     }

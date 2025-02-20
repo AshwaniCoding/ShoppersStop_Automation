@@ -9,13 +9,13 @@ Feature: Validate Cart Persistence Functionality
     And user login with a valid phone or email "phone.or.email"
     And enter the one time password
     Then verify user is successfully logged in the application or website
-    When user search for a product "product.name"
+
+  Scenario: Verify cart items persist after logging out and logging in
+    When user search for a product "product.name.primary"
     And user click on search button
     Then verify user is on products page
     When user click on the first product
     Then verify user is on product details page
-
-  Scenario: Verify cart items persist after logging out and logging in
     When user adds a product to the cart
     And user navigates to my cart page
     Then verify user is on my cart page
@@ -33,6 +33,11 @@ Feature: Validate Cart Persistence Functionality
     Then verify the product added to the cart is still present after login
 
   Scenario: Verify cart is cleared after removing all items
+    When user search for a product "product.name.secondary"
+    And user click on search button
+    Then verify user is on products page
+    When user click on the first product
+    Then verify user is on product details page
     When user adds a product to the cart
     And user navigates to my cart page
     Then verify user is on my cart page

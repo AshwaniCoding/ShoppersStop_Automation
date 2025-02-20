@@ -27,6 +27,7 @@ public class AndroidCartPage extends AndroidBasePage implements CartPage {
 
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'bag is empty')]")
     WebElement cartIsEmptyMessage;
+
     @Override
     public boolean isCartPageDisplayed() {
         return isDisplayed(myBagTextElement);
@@ -38,7 +39,9 @@ public class AndroidCartPage extends AndroidBasePage implements CartPage {
         String productCompanyName = ConfigReader.getConfigValue("product.company");
         String productTitle = ConfigReader.getConfigValue("product.title");
 
-        while (!isDisplayed(totalMrpTextElement)) {
+        pause(3);
+
+        do {
             for (WebElement product : productsInCart) {
                 if (product.getAttribute("content-desc").contains(productCompanyName) && product.getAttribute("content-desc").contains(productTitle)) {
                     return true;
@@ -46,14 +49,14 @@ public class AndroidCartPage extends AndroidBasePage implements CartPage {
             }
             scrollPage();
             productsInCart = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'₹ ')]"));
-        }
+        } while (!isDisplayed(totalMrpTextElement));
 
         return false;
     }
 
     @Override
     public void removeAllItems() {
-        for(WebElement item : itemsInCart){
+        for (WebElement item : itemsInCart) {
             removeItemBtn.click();
         }
 

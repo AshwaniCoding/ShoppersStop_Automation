@@ -58,7 +58,7 @@ public class HomePageSteps extends BaseSteps {
 
     @When("user search for a product {string}")
     public void userSearchForAProduct(String productName) {
-        if (productName.equals("product.name")) {
+        if (productName.equals("product.name.primary") || productName.equals("product.name.secondary")) {
             productName = ConfigReader.getConfigValue(productName);
         }
         homePage.searchForProduct(productName);
