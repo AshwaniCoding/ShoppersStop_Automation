@@ -1,6 +1,7 @@
 package com.automation.pages.android;
 
 import com.automation.utils.DriverManager;
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -145,6 +146,14 @@ public class AndroidBasePage {
                 .addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         ((AndroidDriver) driver).perform(Collections.singletonList(sequence));
+    }
+
+    public void clickOnKeyboardSearchBtn() {
+        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
+    }
+
+    public void clickOnKeyboardDoneBtn() {
+        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "done"));
     }
 
 }

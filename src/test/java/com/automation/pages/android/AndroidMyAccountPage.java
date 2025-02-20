@@ -24,7 +24,7 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
 
     @Override
     public boolean isUserLoggedIn() {
-        pause(5);
+        pause(3);
         return isDisplayed(userDetails);
     }
 

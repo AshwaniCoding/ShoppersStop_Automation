@@ -74,16 +74,9 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
 
     @Override
     public void clickOnSearchBtn() {
-//        suggestedOption.click();
-//        suggestedOption.click();
-          ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
+        clickOnKeyboardSearchBtn();
     }
-//    @Override
-//    public void clickOnSearchBtn() {
-//        pause(5);
-//        ((AndroidDriver) driver).executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
-//        pause(5);
-//    }
+
 
     @Override
     public boolean isUserLoggedOut() {

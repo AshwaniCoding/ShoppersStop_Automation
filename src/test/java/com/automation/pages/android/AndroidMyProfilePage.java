@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePage {
 
@@ -65,6 +67,15 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'Gender')]/android.view.View[@content-desc='Edit']")
     WebElement editProfileLink;
 
+    @FindBy(xpath = "//android.view.View[@content-desc='Delete']")
+    List<WebElement> deleteBtnList;
+
+    @FindBy(xpath = "//android.view.View[@content-desc='CONFIRM']")
+    WebElement confirmBtn;
+
+    @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'My Profile')]")
+    WebElement myProfileLink;
+
     @Override
     public boolean isMyProfilePageDisplayed() {
         return isDisplayed(myProfileHeadingElement);
@@ -89,7 +100,21 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         }
 
         if (isDisplayed(addAddressLink)) {
+
+            for (int i = 0; i < addressList.size(); i++) {
+                address = addressList.get(i).getAttribute("content-desc");
+                if (address.toLowerCase().contains(name.toLowerCase())) {
+                    if (editBtnList.size() >= i + 1) {
+                        editBtnList.get(i + 1).click();
+                        return;
+                    }
+                }
+            }
+
             scrollPage();
+            addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+            editBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Edit']"));
+
             if (isDisplayed(showMoreBtn)) {
                 showMoreBtn.click();
 
@@ -100,14 +125,14 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
                         if (address.toLowerCase().contains(name.toLowerCase())) {
                             if (editBtnList.size() >= i + 1) {
                                 editBtnList.get(i + 1).click();
-                                break;
+                                return;
                             }
                         }
                     }
 
                     scrollPage();
                     addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
-
+                    editBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Edit']"));
                 }
             }
         }
@@ -133,16 +158,24 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         String addressType = ConfigReader.getConfigValue("address.type");
         String locationName = ConfigReader.getConfigValue("address.location.name");
 
+        fullNameInput.click();
         fullNameInput.sendKeys(fullName);
+        mobileInput.click();
         mobileInput.sendKeys(mobile);
+        pinCodeInput.click();
         pinCodeInput.sendKeys(pinCode);
+        fullAddressInput.click();
         fullAddressInput.sendKeys(fullAddress);
+
+        clickOnKeyboardDoneBtn();
 
         if (addressType.equalsIgnoreCase("Work")) {
             radioButtons.get(1).click();
         } else if (addressType.equalsIgnoreCase("Other")) {
             radioButtons.getLast().click();
+            locationNameInput.click();
             locationNameInput.sendKeys(locationName);
+            clickOnKeyboardDoneBtn();
         } else {
             radioButtons.getFirst().click();
         }
@@ -173,6 +206,20 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         }
 
         scrollPage();
+        addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+
+        for (WebElement element : addressList) {
+            address = element.getAttribute("content-desc");
+            if (address.contains(addressType) || address.contains(locationName)) {
+                if (address.contains(fullName)) {
+                    if (address.contains(mobile)) {
+                        if (address.toLowerCase().contains(fullAddress.toLowerCase()) && address.contains(pinCode)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
 
         if (isDisplayed(showMoreBtn)) {
             showMoreBtn.click();
@@ -204,16 +251,52 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @Override
     public void clickOnDeleteAddressLink(String name) {
 
+        ConfigReader.setConfigValue("address.count.by.name", String.valueOf(addressCountByName(name)));
+
+        String address = firstAddress.getAttribute("content-desc");
+        if (address.toLowerCase().contains(name.toLowerCase())) {
+            deleteBtnList.getFirst().click();
+        }
+
+        if (isDisplayed(addAddressLink)) {
+
+
+            do {
+
+                for (int i = 0; i < addressList.size(); i++) {
+                    address = addressList.get(i).getAttribute("content-desc");
+                    if (address.toLowerCase().contains(name.toLowerCase())) {
+                        if (deleteBtnList.size() >= i + 1) {
+                            deleteBtnList.get(i + 1).click();
+                            return;
+                        }
+                    }
+                }
+
+                scrollPage();
+                addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+                deleteBtnList = driver.findElements(By.xpath("//android.view.View[@content-desc='Delete']"));
+            } while (!isDisplayed(showLessBtn));
+
+
+        }
+
     }
 
     @Override
     public void clickOnConfirmBtn() {
-
+        confirmBtn.click();
     }
 
     @Override
     public boolean isAddressDeleted(String name) {
-        return true;
+
+        // As app is not loading and taking too much time for loading after deleting
+        navigateBack(myProfileLink);
+        myProfileLink.click();
+
+        int count = addressCountByName(name);
+        return (count + 1) == Integer.parseInt(ConfigReader.getConfigValue("address.count.by.name"));
     }
 
     @Override
@@ -260,17 +343,32 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
         List<String> fieldsToCheck = Arrays.asList(addressType, locationName, fullName, mobile, fullAddress, pinCode);
 
-        while (!isDisplayed(editProfileLink)) {
-            scrollPageDown();
+        // Just to update it well
+        navigateBack(myProfileLink);
+        myProfileLink.click();
+
+        scrollPage();
+        addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+
+        if (isFieldUpdated(fieldsToCheck, addressList)) {
+            return true;
         }
 
-//        while () {
-//        }
-//        I need to work here
+        if (isDisplayed(showMoreBtn)) {
+            showMoreBtn.click();
 
+            while (!isDisplayed(showLessBtn)) {
 
-        return isFieldUpdated(fieldsToCheck, addressList);
+                if (isFieldUpdated(fieldsToCheck, addressList)) {
+                    return true;
+                }
 
+                scrollPage();
+                addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+            }
+        }
+
+        return false;
     }
 
     private boolean isFieldUpdated(List<String> values, List<WebElement> addressList) {
@@ -287,9 +385,55 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return false;
     }
 
+    private int addressCountByName(String name) {
+        int count = 0;
+        Set<String> processedAddresses = new HashSet<>();
+        String address = firstAddress.getAttribute("content-desc").trim().toLowerCase();
+        if (address.contains(name.toLowerCase())) {
+            count++;
+            processedAddresses.add(address);
+        }
+
+        for (WebElement element : addressList) {
+            address = element.getAttribute("content-desc").trim().toLowerCase();
+            if (address.contains(name.toLowerCase()) && !processedAddresses.contains(address)) {
+                count++;
+                processedAddresses.add(address);
+            }
+        }
+
+        scrollPage();
+
+        if (isDisplayed(showMoreBtn)) {
+            showMoreBtn.click();
+            scrollPage();
+            addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+
+            while (!isDisplayed(showLessBtn)) {
+                for (WebElement element : addressList) {
+                    address = element.getAttribute("content-desc").trim().toLowerCase();
+                    if (address.contains(name.toLowerCase()) && !processedAddresses.contains(address)) {
+                        count++;
+                        processedAddresses.add(address);
+                    }
+                }
+                scrollPage();
+                addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
+            }
+        }
+
+        while (!isDisplayed(editProfileLink)) {
+            scrollPageDown();
+        }
+
+        return count;
+    }
+
+
     private void updateField(WebElement element, String value) {
         if (value != null && !value.trim().isEmpty()) {
             element.clear();
+            element.click();
             element.sendKeys(value);
         }
     }
