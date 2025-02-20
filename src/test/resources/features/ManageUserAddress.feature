@@ -20,20 +20,20 @@ Feature: Validate Add, Edit and Update Address Functionality
     And click on add address button
     Then verify the address is successfully added
 
-  Scenario: Verify user successfully edit default address
+  Scenario: Verify user successfully edit specific address
     When user click on my account page link
     And click on my profile link
     Then verify user is on my profile page
-    When click on edit address link
+    When click on edit address link for the specific address "update.address.name"
     Then verify user is on edit address section
     When user update the address details
-    And clicks on the update changes button
+    And click on the update changes button
     Then verify the address is successfully updated
 
   Scenario: Verify user successfully deletes a specific address
     When user click on my account page link
     And click on my profile link
     Then verify user is on my profile page
-    When user click on the delete link for the specific address "address.name"
+    When user click on the delete link for the specific address "delete.address.name"
     And click on confirm button
-    Then verify the specific address "address.name" is successfully deleted
+    Then verify the specific address "delete.address.name" is successfully deleted

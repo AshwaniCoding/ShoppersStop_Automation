@@ -19,6 +19,9 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
     @FindBy(xpath = "//android.view.View[@content-desc='YES,LOG OUT']")
     WebElement yesLogoutBtn;
 
+    @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'My Profile')]")
+    WebElement myProfileLink;
+
     @Override
     public boolean isUserLoggedIn() {
         pause(5);
@@ -40,8 +43,8 @@ public class AndroidMyAccountPage extends AndroidBasePage implements MyAccountPa
     }
 
     @Override
-    public void clickOnMyProfileLink(){
-
+    public void clickOnMyProfileLink() {
+        myProfileLink.click();
     }
 }
 

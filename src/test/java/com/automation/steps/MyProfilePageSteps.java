@@ -23,11 +23,6 @@ public class MyProfilePageSteps extends BaseSteps {
         Assert.assertTrue(myProfilePage.isAddAddressSectionDisplayed());
     }
 
-    @When("click on edit address link")
-    public void clickOnEditAddressLink() {
-        myProfilePage.clickOnEditAddressLink();
-    }
-
     @Then("verify user is on edit address section")
     public void verifyUserIsOnEditAddressSection() {
         Assert.assertTrue(myProfilePage.isEditAddressSectionDisplayed());
@@ -61,5 +56,25 @@ public class MyProfilePageSteps extends BaseSteps {
     @Then("verify the specific address {string} is successfully deleted")
     public void verifyTheSpecificAddressIsSuccessfullyDeleted(String name) {
         Assert.assertTrue(myProfilePage.isAddressDeleted(ConfigReader.getConfigValue(name)));
+    }
+
+    @When("user update the address details")
+    public void userUpdateTheAddressDetails() {
+        myProfilePage.updateAddressDetails();
+    }
+
+    @And("click on the update changes button")
+    public void clickOnTheUpdateChangesButton() {
+        myProfilePage.clickOnUpdateChangesBtn();
+    }
+
+    @Then("verify the address is successfully updated")
+    public void verifyTheAddressIsSuccessfullyUpdated() {
+        Assert.assertTrue(myProfilePage.isAddressUpdated());
+    }
+
+    @When("click on edit address link for the specific address {string}")
+    public void clickOnEditAddressLinkForTheSpecificAddress(String name) {
+        myProfilePage.clickOnEditAddressLink(ConfigReader.getConfigValue(name));
     }
 }

@@ -60,8 +60,14 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
     @FindBy(xpath = "//div[contains(@class,'bg-white md:bg-neutral-100')]//div[text()='Delete']")
     List<WebElement> deleteBtnList;
 
+    @FindBy(xpath = "//div[contains(@class,'bg-white md:bg-neutral-100')]//div[text()='Edit']")
+    List<WebElement> editBtnList;
+
     @FindBy(xpath = "//div[@role='dialog']//button/p[text()='Confirm']")
     WebElement confirmBtn;
+
+    @FindBy(xpath = "//div[@role='dialog']//button/p[text()='UPDATE CHANGES']")
+    WebElement updateChangesBtn;
 
     @Override
     public boolean isMyProfilePageDisplayed() {
@@ -80,12 +86,19 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
     }
 
     @Override
-    public void clickOnEditAddressLink() {
-        defaultAddressEditLink.click();
+    public void clickOnEditAddressLink(String name) {
+        scrollToElement(addressHolderNamesList.getFirst());
+        for (int i = 0; i < addressHolderNamesList.size(); i++) {
+            if (addressHolderNamesList.get(i).getText().equalsIgnoreCase(name) || addressHolderNamesList.get(i).getText().toLowerCase().contains(name.toLowerCase())) {
+                editBtnList.get(i).click();
+                break;
+            }
+        }
     }
 
     @Override
     public boolean isEditAddressSectionDisplayed() {
+        pause(2);
         return isDisplayed(editAddressSectionHeading);
     }
 
@@ -170,17 +183,113 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
 
     @Override
     public boolean isAddressDeleted(String name) {
-        return (addressCountByName(name) + 1) == Integer.parseInt(ConfigReader.getConfigValue("address.count.by.name"));
+        pause(2);
+        if (isDisplayed(addressHolderNamesList.getFirst())) {
+            return (addressCountByName(name) + 1) == Integer.parseInt(ConfigReader.getConfigValue("address.count.by.name"));
+        }
+        return false;
     }
 
-    public int addressCountByName(String name) {
+    @Override
+    public void clickOnUpdateChangesBtn() {
+        updateChangesBtn.click();
+    }
+
+    @Override
+    public void updateAddressDetails() {
+
+        String fullName = ConfigReader.getConfigValue("address.update.name");
+        String mobile = ConfigReader.getConfigValue("address.update.mobile");
+        String pinCode = ConfigReader.getConfigValue("address.update.pin.code");
+        String fullAddress = ConfigReader.getConfigValue("address.update.full.address");
+        String addressType = ConfigReader.getConfigValue("address.update.type");
+        String locationName = ConfigReader.getConfigValue("address.update.location.name");
+
+        updateField(fullNameInput, fullName);
+        updateField(mobileInput, mobile);
+        updateField(pinCodeInput, pinCode);
+        updateField(fullAddressInput, fullAddress);
+
+        scrollToElement(radioButtons.getFirst());
+        pause(2);
+
+        if (addressType != null && !addressType.isEmpty()) {
+            if (addressType.equalsIgnoreCase("Work")) {
+                radioButtons.get(1).click();
+            } else if (addressType.equalsIgnoreCase("Other")) {
+                radioButtons.getLast().click();
+                updateField(locationNameInput, locationName);
+            } else {
+                radioButtons.getFirst().click();
+            }
+        }
+
+    }
+
+    @Override
+    public boolean isAddressUpdated() {
+
+        String fullName = ConfigReader.getConfigValue("address.update.name");
+        String mobile = ConfigReader.getConfigValue("address.update.mobile");
+        String pinCode = ConfigReader.getConfigValue("address.update.pin.code");
+        String fullAddress = ConfigReader.getConfigValue("address.update.full.address");
+        String addressType = ConfigReader.getConfigValue("address.update.type");
+        String locationName = ConfigReader.getConfigValue("address.update.location.name");
+
+        pause(2);
+
+        for (int i = 0; i < addressTypeList.size(); i++) {
+
+            boolean addressMatches = isFieldUpdated(addressType, addressTypeList.get(i));
+
+            if (isFieldUpdated(locationName, addressTypeList.get(i))) {
+                addressMatches = true;
+            }
+
+            if (isFieldUpdated(fullName, addressHolderNamesList.get(i))) {
+                addressMatches = true;
+            }
+
+            if (isFieldUpdated(mobile, mobileNumberList.get(i))) {
+                addressMatches = true;
+            }
+
+            if (isFieldUpdated(fullAddress, fullAddressList.get(i))) {
+                addressMatches = true;
+            }
+
+            if (isFieldUpdated(pinCode, fullAddressList.get(i))) {
+                addressMatches = true;
+            }
+
+            if (addressMatches) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isFieldUpdated(String value, WebElement element) {
+        return value != null && !value.trim().isEmpty() && element.getText().equalsIgnoreCase(value);
+    }
+
+    private int addressCountByName(String name) {
         int count = 0;
         for (WebElement element : addressHolderNamesList) {
             if (element.getText().trim().equalsIgnoreCase(name) || element.getText().trim().toLowerCase().contains(name.toLowerCase())) {
                 count = count + 1;
             }
         }
-        System.out.println(count);
         return count;
     }
+
+    private void updateField(WebElement element, String value) {
+        if (value != null && !value.trim().isEmpty()) {
+            element.clear();
+            element.sendKeys(value);
+        }
+    }
+
+
 }
