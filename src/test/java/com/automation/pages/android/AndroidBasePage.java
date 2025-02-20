@@ -70,7 +70,7 @@ public class AndroidBasePage {
 
     public boolean isDisplayed(WebElement element) {
         try {
-            setImplicitWait(3);
+            setImplicitWait(5);
             return element.isDisplayed();
         } catch (Exception e) {
             return false;

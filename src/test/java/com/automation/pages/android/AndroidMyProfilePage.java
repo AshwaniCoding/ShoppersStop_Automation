@@ -6,10 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePage {
 
@@ -366,40 +363,32 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
     private int addressCountByName(String name) {
         int count = 0;
+
         Set<String> processedAddresses = new HashSet<>();
-        String address = firstAddress.getAttribute("content-desc").trim().toLowerCase();
-        if (address.contains(name.toLowerCase())) {
-            count++;
-            processedAddresses.add(address);
-        }
+        List<WebElement> previousAddressList;
 
-        for (WebElement element : addressList) {
-            address = element.getAttribute("content-desc").trim().toLowerCase();
-            if (address.contains(name.toLowerCase()) && !processedAddresses.contains(address)) {
-                count++;
-                processedAddresses.add(address);
-            }
-        }
+        do {
 
-        scrollPage();
+            addressList = driver.findElements(By.xpath("//*[contains(@content-desc,'Phone: +91')]"));
 
-        if (isDisplayed(showMoreBtn)) {
-            showMoreBtn.click();
-            scrollPage();
-            addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
-
-            while (!isDisplayed(showLessBtn)) {
-                for (WebElement element : addressList) {
-                    address = element.getAttribute("content-desc").trim().toLowerCase();
-                    if (address.contains(name.toLowerCase()) && !processedAddresses.contains(address)) {
-                        count++;
-                        processedAddresses.add(address);
-                    }
+            for (WebElement element : addressList) {
+                String address = element.getAttribute("content-desc").trim().toLowerCase();
+                if (address.contains(name.toLowerCase()) && !processedAddresses.contains(address)) {
+                    count++;
+                    processedAddresses.add(address);
                 }
-                scrollPage();
-                addressList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'Phone: +91')]"));
             }
-        }
+
+            previousAddressList = new ArrayList<>(addressList);
+
+            scrollPage();
+
+            if (isDisplayed(showMoreBtn)) {
+                showMoreBtn.click();
+            }
+
+
+        } while (!addressList.equals(previousAddressList));
 
         while (!isDisplayed(editProfileLink)) {
             scrollPageDown();
