@@ -13,11 +13,14 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     @FindBy(xpath = "//android.widget.ScrollView")
     WebElement productDetailsPage;
 
-    @FindBy(xpath = "//android.widget.ImageView[@content-desc='WISHLIST']")
+    @FindBy(xpath = "//*[@content-desc='WISHLIST']")
     WebElement addToWishListButton;
 
     @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"1\"]")
     WebElement myWishlistIcon;
+
+    @FindBy(xpath = "//android.widget.ScrollView/android.widget.ImageView[3]")
+    WebElement updatedWishlistIcon;
 
     @FindBy(xpath = "//android.widget.ImageView[@content-desc='ADD TO BAG']")
     WebElement addToBagBtn;
@@ -35,7 +38,7 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     List<WebElement> productCompanyAndTitle;
 
     @FindBy(xpath = "//android.widget.ScrollView/android.view.View[1]/following-sibling::android.view.View")
-    public static WebElement productDetails;
+    WebElement productDetails;
 
     @Override
     public boolean isProductDetailsPageDisplayed() {

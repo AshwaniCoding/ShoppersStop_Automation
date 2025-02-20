@@ -78,6 +78,17 @@ public class AndroidBasePage {
         }
     }
 
+    public boolean isDisplayed(String xpath) {
+        try {
+            setImplicitWait(5);
+            return driver.findElement(By.xpath(xpath)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        } finally {
+            setImplicitWait(60);
+        }
+    }
+
     public void setImplicitWait(int seconds) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
     }

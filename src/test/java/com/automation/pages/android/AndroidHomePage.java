@@ -65,7 +65,7 @@ public class AndroidHomePage extends AndroidBasePage implements HomePage {
         }
         searchBar.click();
 
-        System.out.println("Before randoCLicl1");
+        System.out.println("Before random cLick1");
         randomClick();
         System.out.println("After random click1");
         searchBarInput.click();
