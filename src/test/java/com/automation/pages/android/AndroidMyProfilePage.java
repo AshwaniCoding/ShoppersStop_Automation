@@ -79,9 +79,18 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
     @FindBy(xpath = "//android.widget.ImageView[contains(@content-desc,'My Profile')]")
     WebElement myProfileLink;
 
-    WebElement editAddressElement;
+    @FindBy(xpath = "//android.view.View[@content-desc='Become a First Citizen Club Member']")
+    WebElement becomeClubMemberTextElement;
 
-    String XPATH_RELATIVE_EDIT_ADDRESS = "//*[contains(@content-desc,'%s')]/android.view.View[@content-desc='Edit']";
+    @FindBy(xpath = "//android.view.View[@content-desc='Gender']/following-sibling::android.widget.ImageView")
+    List<WebElement> genderRadioBtnList;
+
+    @FindBy(xpath = "//android.view.View[@content-desc='UPDATE CHANGES']")
+    WebElement editProfileUpdateChangesBtn;
+
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,'Mobile :')]")
+    WebElement profileDetails;
+
 
     @Override
     public boolean isMyProfilePageDisplayed() {
@@ -345,6 +354,53 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         }
 
         return false;
+    }
+
+    @Override
+    public void clickOnEditProfileBtn() {
+        editProfileLink.click();
+    }
+
+    @Override
+    public void clickOnEditProfileUpdateChangesBtn() {
+        editProfileUpdateChangesBtn.click();
+    }
+
+    @Override
+    public void updateNameAndGender(String name, String gender) {
+
+        if (gender != null && !gender.isEmpty()) {
+            if (gender.equalsIgnoreCase("Female")) {
+                genderRadioBtnList.get(1).click();
+            } else if (gender.equalsIgnoreCase("Other")) {
+                genderRadioBtnList.get(2).click();
+            } else {
+                genderRadioBtnList.getFirst().click();
+            }
+        }
+
+        updateField(fullNameInput, name);
+        clickOnKeyboardDoneBtn();
+
+    }
+
+    @Override
+    public boolean isEditProfileSectionDisplayed() {
+        return isDisplayed(becomeClubMemberTextElement) && isDisplayed(editProfileUpdateChangesBtn);
+    }
+
+    @Override
+    public boolean isProfileUpdated(String name, String gender) {
+
+        String details = profileDetails.getAttribute("content-desc").replace("\n", " ").toLowerCase();
+        System.out.println(details);
+        System.out.println(details.contains(name.toLowerCase()));
+        if (details.contains(name.toLowerCase())) {
+            return true;
+        }
+        System.out.println(details.contains(gender.toLowerCase()));
+
+        return details.contains(gender.toLowerCase());
     }
 
     private boolean isFieldUpdated(List<String> values, List<WebElement> addressList) {

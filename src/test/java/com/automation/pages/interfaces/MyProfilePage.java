@@ -28,4 +28,14 @@ public interface MyProfilePage {
     void updateAddressDetails();
 
     boolean isAddressUpdated();
+
+    void clickOnEditProfileBtn();
+
+    void clickOnEditProfileUpdateChangesBtn();
+
+    void updateNameAndGender(String configValue, String configValue1);
+
+    boolean isEditProfileSectionDisplayed();
+
+    boolean isProfileUpdated(String configValue, String configValue1);
 }

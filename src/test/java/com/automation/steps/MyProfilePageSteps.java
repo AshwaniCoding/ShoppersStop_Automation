@@ -77,4 +77,29 @@ public class MyProfilePageSteps extends BaseSteps {
     public void clickOnEditAddressLinkForTheSpecificAddress(String name) {
         myProfilePage.clickOnEditAddressLink(ConfigReader.getConfigValue(name));
     }
+
+    @When("user click on edit profile button")
+    public void userClickOnEditProfileButton() {
+        myProfilePage.clickOnEditProfileBtn();
+    }
+
+    @Then("verify user is on edit profile section")
+    public void verifyUserIsOnEditProfileSection() {
+        Assert.assertTrue(myProfilePage.isEditProfileSectionDisplayed());
+    }
+
+    @When("user update name {string} and gender {string}")
+    public void userUpdateNameAndGender(String name, String gender) {
+        myProfilePage.updateNameAndGender(ConfigReader.getConfigValue(name), ConfigReader.getConfigValue(gender));
+    }
+
+    @And("click on update changes button")
+    public void clickOnUpdateChangesButton() {
+        myProfilePage.clickOnEditProfileUpdateChangesBtn();
+    }
+
+    @Then("verify profile is updated with name {string} and gender {string}")
+    public void verifyProfileIsUpdatedWithNameAndGender(String name, String gender) {
+        Assert.assertTrue(myProfilePage.isProfileUpdated(ConfigReader.getConfigValue(name), ConfigReader.getConfigValue(gender)));
+    }
 }

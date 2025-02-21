@@ -69,6 +69,21 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
     @FindBy(xpath = "//div[@role='dialog']//button/p[text()='UPDATE CHANGES']")
     WebElement updateChangesBtn;
 
+    @FindBy(xpath = "//div[text()='Mobile No :']/../../following-sibling::div[text()='Edit']")
+    WebElement editProfileLink;
+
+    @FindBy(xpath = "//div[@role='dialog']//div[text()='Edit Profile']")
+    WebElement editProfileSectionHeading;
+
+    @FindBy(xpath = "//div[@role='dialog']//button/p[text()='update changes']")
+    WebElement editProfileUpdateChangesBtn;
+
+    @FindBy(xpath = "//div[@class='bg-transparent flex flex-col']/div")
+    WebElement profileFullName;
+
+    @FindBy(xpath = "//div[text()='Gender :']/following-sibling::div")
+    WebElement profileGender;
+
     @Override
     public boolean isMyProfilePageDisplayed() {
         return isDisplayed(myProfileHeadingElement);
@@ -268,6 +283,51 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
         }
 
         return false;
+    }
+
+    @Override
+    public void clickOnEditProfileBtn() {
+        editProfileLink.click();
+    }
+
+    @Override
+    public void clickOnEditProfileUpdateChangesBtn() {
+        editProfileUpdateChangesBtn.click();
+    }
+
+    @Override
+    public void updateNameAndGender(String name, String gender) {
+
+        updateField(fullNameInput, name);
+
+        if (gender != null && !gender.isEmpty()) {
+            if (gender.equalsIgnoreCase("Female")) {
+                radioButtons.get(1).click();
+            } else if (gender.equalsIgnoreCase("Other")) {
+                radioButtons.getLast().click();
+            } else {
+                radioButtons.getFirst().click();
+            }
+        }
+
+    }
+
+    @Override
+    public boolean isEditProfileSectionDisplayed() {
+        pause(3);
+        return isDisplayed(editProfileSectionHeading);
+    }
+
+    @Override
+    public boolean isProfileUpdated(String name, String gender) {
+
+        pause(5);
+
+        if (profileFullName.getText().equalsIgnoreCase(name)) {
+            return true;
+        }
+
+        return profileGender.getText().equalsIgnoreCase(name);
     }
 
     private boolean isFieldUpdated(String value, WebElement element) {
