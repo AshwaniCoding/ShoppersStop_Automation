@@ -10,4 +10,8 @@ public interface ProductsPage {
     void clickOnTheFirstProduct();
 
     boolean isSearchResultsAreRelevant(String productName);
+
+    default void selectLowToHighSort() {
+
+    }
 }

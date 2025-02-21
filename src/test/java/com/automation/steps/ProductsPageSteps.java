@@ -23,12 +23,17 @@ public class ProductsPageSteps extends BaseSteps {
         // It should be boolean because we are verifying so check the method and implement again
         // Also remove the method verifySearchResultsAreRelevant
         // Implement the correct logic
-//        productsPage.verifySearchResultsAreRelevant(productName);
+        //productsPage.verifySearchResultsAreRelevant(productName);
         Assert.assertTrue(productsPage.isSearchResultsAreRelevant(productName));
     }
 
     @Then("verify user is on products page")
     public void verifyUserIsOnProductsPage() {
         Assert.assertTrue(productsPage.isProductPageDisplayed());
+    }
+
+    @When("user selects price low to high from the sort dropdown")
+    public void userSelectsPriceLowToHighFromTheSortDropdown() {
+        productsPage.selectLowToHighSort();
     }
 }

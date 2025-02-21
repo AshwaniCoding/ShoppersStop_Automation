@@ -23,7 +23,7 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     @FindBy(xpath = "//android.view.View[contains(@content-desc,\"Watch\")]")
     List<WebElement> productNames;
 
-    @FindBy(xpath = "//android.view.View[@content-desc and @class=\"android.view.View\"]")
+    @FindBy(xpath = "//android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[@content-desc and @class=\"android.view.View\"]")
     List<WebElement> productNames2;
 
     @FindBy(xpath = "//android.widget.FrameLayout[@resource-id=\"android:id/content\"]//android.widget.FrameLayout/android.view.View//android.view.View/android.view.View[3]//android.view.View[3]/android.view.View/android.view.View/android.view.View[1]/android.view.View")
@@ -37,6 +37,12 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'₹')]")
     List<WebElement> productsList;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"SORT \"]")
+    WebElement sortIcon;
+
+    @FindBy(xpath = "//android.view.View[@content-desc=\"Price Low to High\"]")
+    WebElement lowToHighSortIcon;
 
     public void chooseFilters() {
         chooseFilterBtn.click();
@@ -59,7 +65,24 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     @Override
     public boolean isSearchResultsAreRelevant(String productName) {
-        return false;
+        for (int i = 0; i < 3; i++) {
+            for (WebElement we : productNames2) {
+                try {
+                    Assert.assertTrue(we.getAttribute("content-desc").contains(productName));
+                } catch (AssertionError ae) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
+
+    @Override
+    public void selectLowToHighSort() {
+        sortIcon.click();
+        lowToHighSortIcon.click();
+
     }
 
     @Override
