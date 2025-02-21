@@ -5,6 +5,8 @@ import com.automation.utils.ConfigReader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class WebProductDetailsPage extends WebBasePage implements ProductDetailsPage {
 
     @FindBy(xpath = "//h1/div[contains(@class,'select-text')]")
@@ -12,6 +14,9 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
 
     @FindBy(xpath = "//h1/div/div[contains(@class,'select-text')]")
     WebElement productCompanyName;
+
+    @FindBy(xpath = "//div[text()='₹']")
+    List<WebElement> productPrice;
 
     @FindBy(xpath = "//p[text()='Add to bag']")
     WebElement addToBagBtn;
@@ -61,9 +66,9 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
 
     @Override
     public void clickOnAddToWishlistButton() {
-        if(isDisplayed(addToWishlistLink)){
+        if (isDisplayed(addToWishlistLink)) {
             addToWishlistLink.click();
-        }else{
+        } else {
             updatedAddToWishlist.click();
         }
     }
@@ -84,7 +89,15 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
         driver.navigate().back();
     }
 
+    @Override
+    public boolean isProductNameAndPriceDisplayed() {
+        return isDisplayed(productName) && isDisplayed(productCompanyName) && isDisplayed(productPrice.getFirst());
+    }
 
+    @Override
+    public boolean isProductDetailsAreDisplayed() {
+        return isDisplayed(productDetailsBtn);
+    }
 
 
 }

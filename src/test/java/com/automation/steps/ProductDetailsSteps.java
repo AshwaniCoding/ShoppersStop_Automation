@@ -29,4 +29,13 @@ public class ProductDetailsSteps extends BaseSteps {
     }
 
 
+    @And("verify product name and price are visible")
+    public void verifyProductNameAndPriceAreVisible() {
+        Assert.assertTrue(productDetailsPage.isProductNameAndPriceDisplayed());
+    }
+
+    @And("verify product details are available")
+    public void verifyProductDetailsAreAvailable() {
+        Assert.assertTrue(productDetailsPage.isProductDetailsAreDisplayed());
+    }
 }
