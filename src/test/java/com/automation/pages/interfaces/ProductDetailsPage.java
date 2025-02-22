@@ -15,4 +15,8 @@ public interface ProductDetailsPage {
     void clickOnWishlistLink();
 
     void navigateToPreviousPage();
+
+    boolean isProductNameAndPriceDisplayed();
+
+    boolean isProductDetailsAreDisplayed();
 }

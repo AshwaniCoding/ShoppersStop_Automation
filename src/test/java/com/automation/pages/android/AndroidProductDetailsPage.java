@@ -37,8 +37,14 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     @FindBy(xpath = "//android.view.View[contains(@content-desc,'MRP')]/preceding-sibling::android.view.View[@content-desc]")
     List<WebElement> productCompanyAndTitle;
 
-    @FindBy(xpath = "//android.widget.ScrollView/android.view.View[1]/following-sibling::android.view.View")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='PRODUCT DETAILS']")
     WebElement productDetails;
+
+    @FindBy(xpath = "//android.view.View[contains(@content-desc,'₹')]")
+    WebElement productPrice;
+
+    @FindBy(xpath = "//android.view.View[@content-desc='Similar Products']")
+    WebElement similarProductsTab;
 
     @Override
     public boolean isProductDetailsPageDisplayed() {
@@ -83,6 +89,23 @@ public class AndroidProductDetailsPage extends AndroidBasePage implements Produc
     @Override
     public void navigateToPreviousPage() {
         driver.navigate().back();
+    }
+
+    @Override
+    public boolean isProductNameAndPriceDisplayed() {
+        pause(2);
+        return isDisplayed(productCompanyAndTitle.getFirst()) && isDisplayed(productCompanyAndTitle.getLast()) && isDisplayed(productPrice);
+    }
+
+    @Override
+    public boolean isProductDetailsAreDisplayed() {
+        while (!isDisplayed(similarProductsTab)) {
+            if (isDisplayed(productDetails)) {
+                return true;
+            }
+            scrollPage();
+        }
+        return false;
     }
 
 }
