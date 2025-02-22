@@ -11,7 +11,11 @@ public interface ProductsPage {
 
     boolean isSearchResultsAreRelevant(String productName);
 
-    default void selectLowToHighSort() {
+    void selectLowToHighSort();
 
-    }
+    void isPriceSortedFromLowToHigh();
+
+    void isPriceSortedFromHighToLow();
+
+    void selectHighToLowSort();
 }

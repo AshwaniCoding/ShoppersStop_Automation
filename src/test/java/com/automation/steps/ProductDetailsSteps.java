@@ -27,6 +27,4 @@ public class ProductDetailsSteps extends BaseSteps {
     public void userClicksOnTheAddToWishlistButtonAgain() {
         productDetailsPage.clickOnAddToWishlistButton();
     }
-
-
 }

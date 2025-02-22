@@ -36,4 +36,19 @@ public class ProductsPageSteps extends BaseSteps {
     public void userSelectsPriceLowToHighFromTheSortDropdown() {
         productsPage.selectLowToHighSort();
     }
+
+    @Then("verify the products are sorted from low to high price")
+    public void verifyTheProductsAreSortedFromLowToHighPrice() {
+        productsPage.isPriceSortedFromLowToHigh();
+    }
+
+    @When("user selects price high to low from the sort dropdown")
+    public void userSelectsPriceHighToLowFromTheSortDropdown() {
+        productsPage.selectHighToLowSort();
+    }
+
+    @Then("verify the products are sorted from high to low price")
+    public void verifyTheProductsAreSortedFromHighToLowPrice() {
+        productsPage.isPriceSortedFromHighToLow();
+    }
 }

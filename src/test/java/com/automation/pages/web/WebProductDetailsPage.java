@@ -71,7 +71,7 @@ public class WebProductDetailsPage extends WebBasePage implements ProductDetails
     @Override
     public void saveProductName() {
         ConfigReader.setConfigValue("product.company", productCompanyName.getText());
-        ConfigReader.setConfigValue("product.title", productName.getText());
+        ConfigReader.setConfigValue("0", productName.getText());
     }
 
     @Override

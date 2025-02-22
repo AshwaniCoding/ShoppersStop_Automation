@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AndroidProductsPage extends AndroidBasePage implements ProductsPage {
@@ -43,6 +44,11 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     @FindBy(xpath = "//android.view.View[@content-desc=\"Price Low to High\"]")
     WebElement lowToHighSortIcon;
+
+    @FindBy(xpath = "//android.view.View[@content-desc=\"Price High to Low\"]")
+    WebElement highToLowSortIcon;
+
+    ArrayList<Integer> productPrices = new ArrayList<>();
 
     public void chooseFilters() {
         chooseFilterBtn.click();
@@ -82,6 +88,61 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     public void selectLowToHighSort() {
         sortIcon.click();
         lowToHighSortIcon.click();
+    }
+
+    @Override
+    public void isPriceSortedFromLowToHigh() {
+        for (int i = 0; i < 5; i++) {
+            for (WebElement we : productsList) {
+                int a = we.getAttribute("content-desc").indexOf('₹');
+                String sub1 = we.getAttribute("content-desc").substring(a);
+                sub1 = sub1.substring(1, sub1.indexOf("\n"));
+                int productPrice = Integer.parseInt(sub1);
+                System.out.println(sub1+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                if (productPrices.size() > 0) {
+                    Assert.assertTrue(productPrice >= productPrices.getLast());
+                }
+                productPrices.add(productPrice);
+                System.out.println(productPrices.getLast()+"++++++++++++++++++++++++++++++++");
+            }
+            pause(2);
+            scrollPage();
+            scrollPage();
+            productsList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'₹')]"));
+
+        }
+    }
+
+    @Override
+    public void isPriceSortedFromHighToLow() {
+        for (int i = 0; i < 5; i++) {
+            for (WebElement we : productsList) {
+                int a = we.getAttribute("content-desc").indexOf('₹');
+                String sub1 = we.getAttribute("content-desc").substring(a+1);
+                String sub2 = sub1.substring(0, sub1.indexOf(","));
+                String sub3 = sub1.substring(sub1.indexOf(",")+1);
+                int productPrice = Integer.parseInt(sub2+sub3);
+
+                System.out.println(sub1+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+                if (productPrices.size() > 0) {
+                    Assert.assertTrue(productPrice <= productPrices.getLast());
+                }
+                productPrices.add(productPrice);
+                System.out.println(productPrices.getLast()+"++++++++++++++++++++++++++++++++");
+            }
+            pause(2);
+            scrollPage();
+            scrollPage();
+            productsList = driver.findElements(By.xpath("//android.view.View[contains(@content-desc,'₹')]"));
+
+        }
+    }
+
+    @Override
+    public void selectHighToLowSort() {
+        sortIcon.click();
+        highToLowSortIcon.click();
 
     }
 
@@ -96,7 +157,7 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     @Override
     public boolean isProductPageDisplayed() {
-        return isDisplayed(itemsTextElement);
+        return isDisplayed("//android.view.View[contains(@content-desc,'items')]");
     }
 
     @Override
