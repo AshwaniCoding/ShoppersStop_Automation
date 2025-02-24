@@ -1,4 +1,4 @@
-package com.automation.steps;
+package com.automation.steps.ui;
 
 import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.Then;
