@@ -1,6 +1,7 @@
 package com.automation.steps;
 
 import com.automation.pojo.CreateTokenPojo;
+import com.automation.utils.ConfigReader;
 import com.automation.utils.RestAssuredManager;
 import io.cucumber.core.internal.com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +14,7 @@ import java.lang.reflect.Field;
 public class RequestSteps {
     @Given("user wants to call {string} end point")
     public void userWantsToCallEndPoint(String endPoint) {
+        RestAssuredManager.clear();
         RestAssuredManager.setEndPoint(endPoint);
     }
 
@@ -38,6 +40,7 @@ public class RequestSteps {
         String content = RestAssuredManager.getDataFromJsonFile(fileName);
         ObjectMapper objectMapper = new ObjectMapper();
         CreateTokenPojo pojo = objectMapper.readValue(content, CreateTokenPojo.class);
+
         Field field;
 
         field = CreateTokenPojo.class.getDeclaredField("username");
@@ -47,8 +50,25 @@ public class RequestSteps {
         field.setAccessible(true);
         field.set(pojo, password);
 
+        System.out.println(">>>>>>>>>>>Pojo: " + pojo);
+
+
         RestAssuredManager.setBody(pojo);
 
     }
 
+    @When("user performs get call")
+    public void userPerformsGetCall() {
+        RestAssuredManager.get();
+    }
+
+    @And("set path parameter {string} to {string}")
+    public void setPathParameterTo(String pathParam, String value) {
+        RestAssuredManager.setPathParameter(pathParam, ConfigReader.getConfigValue(value));
+    }
+
+    @And("set query parameter {string} to {string}")
+    public void setQueryParameterTo(String parameter, String value) {
+        RestAssuredManager.setQueryParameter(parameter, value);
+    }
 }
