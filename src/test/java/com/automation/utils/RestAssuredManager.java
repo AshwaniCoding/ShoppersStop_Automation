@@ -93,4 +93,27 @@ public class RestAssuredManager {
             return false;
         }
     }
+
+    public static void setPathParameter(String parameter, String value) {
+        requestSpecification.pathParam(parameter, value);
+    }
+
+    public static void setQueryParameter(String parameter, String value) {
+        requestSpecification.queryParam(parameter, value);
+    }
+
+    public static boolean isFieldAvailableWithValue(String fieldName, String fieldValue) {
+        try {
+            String value = RestAssuredManager.getResponseFieldValue(fieldName);
+            System.out.println(fieldValue);
+            System.out.println(value);
+            return value.equals(fieldValue);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static void clear() {
+        requestSpecification = RestAssured.given();
+    }
 }
