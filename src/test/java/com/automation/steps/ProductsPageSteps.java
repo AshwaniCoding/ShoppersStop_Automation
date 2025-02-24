@@ -57,7 +57,7 @@ public class ProductsPageSteps extends BaseSteps {
 
     @Then("verify user get results with only products from the specified brand {string}")
     public void verifyUserGetResultsWithOnlyProductsFromTheSpecifiedBrand(String filterBrandName) {
-        productsPage.isFilterAppliedOnProducts(filterBrandName);
+        productsPage.isBrandFilterAppliedOnProducts(filterBrandName);
     }
 
     @When("user apply filter by gender with value {string}")
@@ -67,7 +67,7 @@ public class ProductsPageSteps extends BaseSteps {
 
     @Then("verify user get results with only products from the specified gender {string}")
     public void verifyUserGetResultsWithOnlyProductsFromTheSpecifiedGender(String filterGender) {
-        productsPage.isFilterAppliedOnProducts(filterGender);
+        productsPage.isGenderFilterAppliedOnProducts(filterGender);
     }
 
     @When("user selects the price range filter {string}")
@@ -77,6 +77,6 @@ public class ProductsPageSteps extends BaseSteps {
 
     @Then("verify user get results with only products priced between {string}")
     public void verifyUserGetResultsWithOnlyProductsPricedBetween(String priceRange) {
-        productsPage.isFilterAppliedOnProducts(priceRange);
+        productsPage.isBrandFilterAppliedOnProducts(priceRange);
     }
 }

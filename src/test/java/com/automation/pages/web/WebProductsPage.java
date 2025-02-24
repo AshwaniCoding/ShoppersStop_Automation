@@ -40,8 +40,8 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
     @FindBy(xpath = "//input[@placeholder=\"Search\"]")
     WebElement filterValueSearch;
 
-    @FindBy(xpath = "//label[@for='%s'']")
-    WebElement filterValueOption;
+    String filterValueOption= "//label[contains(@for,'%s')]";
+
 
     @FindBy(xpath = "//div[contains(@class,\"lg:text-sm xl:text-base mt-3 line-clamp-1\")]")
     List<WebElement> productsDisplayedList;
@@ -124,12 +124,13 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
         brandFilter.click();
         filterValueSearch.click();
         filterValueSearch.sendKeys(ConfigReader.getConfigValue(filterBrandName));
-        filterValueOption.click();
+        WebElement filterValueOptionToClick = driver.findElement(By.xpath(String.format(filterValueOption,ConfigReader.getConfigValue(filterBrandName))));
+        filterValueOptionToClick.click();
 
     }
 
     @Override
-    public boolean isFilterAppliedOnProducts(String filterBrandName) {
+    public boolean isBrandFilterAppliedOnProducts(String filterBrandName) {
 
         for(WebElement we:productsDisplayedList){
             if(we.getText().contains(filterBrandName)){
@@ -144,12 +145,29 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
 
     @Override
     public void applyFilterByGenderWithValue(String filterGender) {
-
+        WebElement genderFilter = driver.findElement(By.xpath(String.format(baseFilterXpath,"Gender")));
+        genderFilter.click();
+        WebElement filterValueToClick = driver.findElement(By.xpath(String.format(filterValueOption,ConfigReader.getConfigValue(filterGender))));
+        filterValueToClick.click();
     }
 
     @Override
     public void applyFilterByPriceRange(String priceRange) {
+        WebElement priceFilter = driver.findElement(By.xpath(String.format(baseFilterXpath,"Price")));
+        priceFilter.click();
+    }
 
+    @Override
+    public boolean isGenderFilterAppliedOnProducts(String filterGender) {
+        for(WebElement we:productsDisplayedList){
+            if(we.getText().contains(filterGender)){
+
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
 
 }

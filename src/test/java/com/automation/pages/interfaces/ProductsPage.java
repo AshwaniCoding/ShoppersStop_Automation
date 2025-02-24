@@ -29,9 +29,13 @@ public interface ProductsPage {
 
     }
 
-    boolean isFilterAppliedOnProducts(String filterBrandName);
+    boolean isBrandFilterAppliedOnProducts(String filterBrandName);
 
     void applyFilterByGenderWithValue(String filterGender);
 
     void applyFilterByPriceRange(String priceRange);
+
+    default boolean isGenderFilterAppliedOnProducts(String filterGender) {
+        return false;
+    }
 }

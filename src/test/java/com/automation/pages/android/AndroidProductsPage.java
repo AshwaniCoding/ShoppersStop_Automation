@@ -89,7 +89,7 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     }
 
     @Override
-    public boolean isFilterAppliedOnProducts(String filterBrandName) {
+    public boolean isBrandFilterAppliedOnProducts(String filterBrandName) {
 
         return isDisplayed(String.format(appliedFilter,filterBrandName));
 
