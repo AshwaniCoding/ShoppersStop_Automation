@@ -1,4 +1,4 @@
-package com.automation.steps;
+package com.automation.steps.ui;
 
 import io.cucumber.java.en.Then;
 

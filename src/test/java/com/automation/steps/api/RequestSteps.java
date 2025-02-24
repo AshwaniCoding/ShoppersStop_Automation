@@ -1,4 +1,4 @@
-package com.automation.steps;
+package com.automation.steps.api;
 
 import com.automation.pojo.CreateTokenPojo;
 import com.automation.utils.ConfigReader;

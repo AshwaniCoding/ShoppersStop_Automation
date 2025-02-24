@@ -1,4 +1,4 @@
-package com.automation.steps;
+package com.automation.steps.common;
 
 import com.automation.utils.ConfigReader;
 import com.automation.utils.DriverManager;
