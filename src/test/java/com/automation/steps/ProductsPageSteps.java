@@ -1,7 +1,5 @@
 package com.automation.steps;
 
-import com.automation.pages.android.AndroidProductsPage;
-import com.automation.utils.ConfigReader;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -50,5 +48,35 @@ public class ProductsPageSteps extends BaseSteps {
     @Then("verify the products are sorted from high to low price")
     public void verifyTheProductsAreSortedFromHighToLowPrice() {
         productsPage.isPriceSortedFromHighToLow();
+    }
+
+    @When("user apply filter by brand with value {string}")
+    public void userApplyFilterByBrandWithValue(String filterBrandName) {
+        productsPage.applyFilterByBrandWithValue(filterBrandName);
+    }
+
+    @Then("verify user get results with only products from the specified brand {string}")
+    public void verifyUserGetResultsWithOnlyProductsFromTheSpecifiedBrand(String filterBrandName) {
+        productsPage.isFilterAppliedOnProducts(filterBrandName);
+    }
+
+    @When("user apply filter by gender with value {string}")
+    public void userApplyFilterByGenderWithValue(String filterGender) {
+        productsPage.applyFilterByGenderWithValue(filterGender);
+    }
+
+    @Then("verify user get results with only products from the specified gender {string}")
+    public void verifyUserGetResultsWithOnlyProductsFromTheSpecifiedGender(String filterGender) {
+        productsPage.isFilterAppliedOnProducts(filterGender);
+    }
+
+    @When("user selects the price range filter {string}")
+    public void userSelectsThePriceRangeFilter(String priceRange) {
+        productsPage.applyFilterByPriceRange(priceRange);
+    }
+
+    @Then("verify user get results with only products priced between {string}")
+    public void verifyUserGetResultsWithOnlyProductsPricedBetween(String priceRange) {
+        productsPage.isFilterAppliedOnProducts(priceRange);
     }
 }

@@ -48,7 +48,14 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
     @FindBy(xpath = "//android.view.View[@content-desc=\"Price High to Low\"]")
     WebElement highToLowSortIcon;
 
+    String filterBaseXpath = "//android.view.View[contains(@content-desc,'%s')]";
+
+    @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'SHOW')]")
+    WebElement showItems;
+
     ArrayList<Integer> productPrices = new ArrayList<>();
+
+    String appliedFilter = "//android.view.View[@content-desc='%s']";
 
     public void chooseFilters() {
         chooseFilterBtn.click();
@@ -67,6 +74,49 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
         }
         showItemsButton.click();
 
+    }
+
+    @Override
+    public void applyFilterByBrandWithValue(String filterBrandName) {
+        chooseFilterBtn.click();
+        WebElement filterName = driver.findElement(By.xpath(String.format(filterBaseXpath,"Brands")));
+        filterName.click();
+
+        WebElement filterValue = driver.findElement(By.xpath(String.format(filterBaseXpath, ConfigReader.getConfigValue(filterBrandName))));
+        filterValue.click();
+
+        showItems.click();
+    }
+
+    @Override
+    public boolean isFilterAppliedOnProducts(String filterBrandName) {
+
+        return isDisplayed(String.format(appliedFilter,filterBrandName));
+
+    }
+
+    @Override
+    public void applyFilterByGenderWithValue(String filterGender) {
+        chooseFilterBtn.click();
+        WebElement filterName = driver.findElement(By.xpath(String.format(filterBaseXpath,"Gender")));
+        filterName.click();
+
+        WebElement filterValue = driver.findElement(By.xpath(String.format(filterBaseXpath, ConfigReader.getConfigValue(filterGender))));
+        filterValue.click();
+
+        showItems.click();
+    }
+
+    @Override
+    public void applyFilterByPriceRange(String priceRange) {
+        chooseFilterBtn.click();
+        WebElement filterName = driver.findElement(By.xpath(String.format(filterBaseXpath,"Price")));
+        filterName.click();
+
+        WebElement filterValue = driver.findElement(By.xpath(String.format(filterBaseXpath, priceRange)));
+        filterValue.click();
+
+        showItems.click();
     }
 
     @Override
@@ -98,12 +148,12 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
                 String sub1 = we.getAttribute("content-desc").substring(a);
                 sub1 = sub1.substring(1, sub1.indexOf("\n"));
                 int productPrice = Integer.parseInt(sub1);
-                System.out.println(sub1+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                System.out.println(sub1 + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                 if (productPrices.size() > 0) {
                     Assert.assertTrue(productPrice >= productPrices.getLast());
                 }
                 productPrices.add(productPrice);
-                System.out.println(productPrices.getLast()+"++++++++++++++++++++++++++++++++");
+                System.out.println(productPrices.getLast() + "++++++++++++++++++++++++++++++++");
             }
             pause(2);
             scrollPage();
@@ -118,18 +168,18 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
         for (int i = 0; i < 5; i++) {
             for (WebElement we : productsList) {
                 int a = we.getAttribute("content-desc").indexOf('₹');
-                String sub1 = we.getAttribute("content-desc").substring(a+1);
+                String sub1 = we.getAttribute("content-desc").substring(a + 1);
                 String sub2 = sub1.substring(0, sub1.indexOf(","));
-                String sub3 = sub1.substring(sub1.indexOf(",")+1);
-                int productPrice = Integer.parseInt(sub2+sub3);
+                String sub3 = sub1.substring(sub1.indexOf(",") + 1);
+                int productPrice = Integer.parseInt(sub2 + sub3);
 
-                System.out.println(sub1+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                System.out.println(sub1);
 
                 if (productPrices.size() > 0) {
                     Assert.assertTrue(productPrice <= productPrices.getLast());
                 }
                 productPrices.add(productPrice);
-                System.out.println(productPrices.getLast()+"++++++++++++++++++++++++++++++++");
+                System.out.println(productPrices.getLast());
             }
             pause(2);
             scrollPage();

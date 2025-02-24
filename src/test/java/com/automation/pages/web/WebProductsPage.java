@@ -1,6 +1,7 @@
 package com.automation.pages.web;
 
 import com.automation.pages.interfaces.ProductsPage;
+import com.automation.utils.ConfigReader;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,17 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
     List<WebElement> productPricesList;
 
     ArrayList<Integer> productPrices = new ArrayList<>();
+
+    String baseFilterXpath = "//button[@type='button' and contains(text(),'%s')]";
+
+    @FindBy(xpath = "//input[@placeholder=\"Search\"]")
+    WebElement filterValueSearch;
+
+    @FindBy(xpath = "//label[@for='%s'']")
+    WebElement filterValueOption;
+
+    @FindBy(xpath = "//div[contains(@class,\"lg:text-sm xl:text-base mt-3 line-clamp-1\")]")
+    List<WebElement> productsDisplayedList;
 
     @Override
     public boolean isProductPageDisplayed() {
@@ -100,5 +112,45 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
         highToLowSortIcon.click();
         pause(20);
     }
+
+    @Override
+    public void chooseFilters() {
+
+    }
+
+    @Override
+    public void applyFilterByBrandWithValue(String filterBrandName) {
+        WebElement brandFilter = driver.findElement(By.xpath(String.format(baseFilterXpath,"Brands")));
+        brandFilter.click();
+        filterValueSearch.click();
+        filterValueSearch.sendKeys(ConfigReader.getConfigValue(filterBrandName));
+        filterValueOption.click();
+
+    }
+
+    @Override
+    public boolean isFilterAppliedOnProducts(String filterBrandName) {
+
+        for(WebElement we:productsDisplayedList){
+            if(we.getText().contains(filterBrandName)){
+
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void applyFilterByGenderWithValue(String filterGender) {
+
+    }
+
+    @Override
+    public void applyFilterByPriceRange(String priceRange) {
+
+    }
+
 }
 

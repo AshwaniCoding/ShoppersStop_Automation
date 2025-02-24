@@ -18,4 +18,20 @@ public interface ProductsPage {
     void isPriceSortedFromHighToLow();
 
     void selectHighToLowSort();
+
+    default void userApplyFilterByBrandWithValue(String filterBrandName) {
+
+    }
+
+    void chooseFilters();
+
+    default void applyFilterByBrandWithValue(String filterBrandName) {
+
+    }
+
+    boolean isFilterAppliedOnProducts(String filterBrandName);
+
+    void applyFilterByGenderWithValue(String filterGender);
+
+    void applyFilterByPriceRange(String priceRange);
 }
