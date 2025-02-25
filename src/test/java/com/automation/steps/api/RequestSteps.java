@@ -9,8 +9,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-import java.lang.reflect.Field;
-
 public class RequestSteps {
     @Given("user wants to call {string} end point")
     public void userWantsToCallEndPoint(String endPoint) {
@@ -44,18 +42,10 @@ public class RequestSteps {
         ObjectMapper objectMapper = new ObjectMapper();
         CreateTokenPojo pojo = objectMapper.readValue(content, CreateTokenPojo.class);
 
-        Field field;
-
-        field = CreateTokenPojo.class.getDeclaredField("username");
-        field.setAccessible(true);
-        field.set(pojo, username);
-        field = CreateTokenPojo.class.getDeclaredField("password");
-        field.setAccessible(true);
-        field.set(pojo, password);
+        pojo.setUsername(username);
+        pojo.setPassword(password);
 
         System.out.println(">>>>>>>>>>>Pojo: " + pojo);
-
-
         RestAssuredManager.setBody(pojo);
 
     }
