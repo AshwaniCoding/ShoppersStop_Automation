@@ -16,7 +16,7 @@ This project demonstrates the use of Selenium, Java, and Cucumber for automating
    - Uses Selenium WebDriver to simulate user interactions such as clicks, text inputs, and navigation.
 
 2. **Mobile App Testing**:
-   - Automated test scripts for testing mobile app functionalities on both Android and iOS platforms.
+   - Automated test scripts for testing mobile app functionalities on Android platform.
    - Uses Appium and Selenium WebDriver for simulating actions on mobile devices.
 
 3. **API Testing (Restful Booker API)**:
