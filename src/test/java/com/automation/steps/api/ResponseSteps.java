@@ -4,6 +4,8 @@ import com.automation.utils.ConfigReader;
 import com.automation.utils.RestAssuredManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.response.Response;
 import org.junit.Assert;
 
 public class ResponseSteps {
@@ -30,5 +32,11 @@ public class ResponseSteps {
     @And("verify the {string} in the response body is {string}")
     public void verifyTheInTheResponseBodyIs(String jsonPath, String fieldValue) {
         Assert.assertTrue(RestAssuredManager.isFieldAvailableWithValue(jsonPath, fieldValue));
+    }
+
+    @And("verify response schema is {string}")
+    public void verifyResponseSchemaIs(String fileName) {
+        Response response = RestAssuredManager.getResponse();
+        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("data/" + fileName));
     }
 }

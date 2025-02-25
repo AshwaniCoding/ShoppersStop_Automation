@@ -9,5 +9,6 @@ Feature: Validate Create Booking Endpoint
     And set request body from file "create_booking.json"
     When user performs post call
     Then verify status code is 200
+    And verify response schema is "create_booking_response_schema.json"
     And verify response body has field "bookingid"
     And verify the "booking.firstname" in the response body is "Ashwani"

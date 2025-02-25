@@ -10,6 +10,7 @@ Feature: Validate Auth Token Endpoint
     When user performs post call
     Then verify status code is 200
     And verify response body has field "token"
+    And verify response schema is "create_token_response_schema.json"
 
   Scenario Outline: Verify user cannot get an auth token with invalid credentials
     And set the request body from file "create_token.json" with "<username>" and "<password>"
