@@ -38,4 +38,8 @@ public interface ProductsPage {
     default boolean isGenderFilterAppliedOnProducts(String filterGender) {
         return false;
     }
+
+    default boolean isPriceFilterAppliedOnProducts(String priceRange) {
+        return false;
+    }
 }

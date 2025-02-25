@@ -77,6 +77,6 @@ public class ProductsPageSteps extends BaseSteps {
 
     @Then("verify user get results with only products priced between {string}")
     public void verifyUserGetResultsWithOnlyProductsPricedBetween(String priceRange) {
-        productsPage.isBrandFilterAppliedOnProducts(priceRange);
+        productsPage.isPriceFilterAppliedOnProducts(priceRange);
     }
 }

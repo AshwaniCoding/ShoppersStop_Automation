@@ -46,6 +46,9 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
     @FindBy(xpath = "//div[contains(@class,\"lg:text-sm xl:text-base mt-3 line-clamp-1\")]")
     List<WebElement> productsDisplayedList;
 
+    @FindBy(xpath = "//div[contains(@class,'whitespace-nowrap text-base')]")
+    WebElement appliedFilter;
+
     @Override
     public boolean isProductPageDisplayed() {
         return itemsTextElement.isDisplayed();
@@ -155,6 +158,11 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
     public void applyFilterByPriceRange(String priceRange) {
         WebElement priceFilter = driver.findElement(By.xpath(String.format(baseFilterXpath,"Price")));
         priceFilter.click();
+        pause(10);
+        String lowerEndPrice=priceRange.substring(1,priceRange.indexOf(" ")) + "-";
+        WebElement filterValueToClick = driver.findElement(By.xpath(String.format(filterValueOption,lowerEndPrice)));
+        filterValueToClick.click();
+        pause(10);
     }
 
     @Override
@@ -168,6 +176,12 @@ public class WebProductsPage extends WebBasePage implements ProductsPage {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isPriceFilterAppliedOnProducts(String priceRange) {
+        String lowerEndPrice=priceRange.substring(1,priceRange.indexOf(" ")) + "-";
+        return appliedFilter.getText().contains(lowerEndPrice);
     }
 
 }

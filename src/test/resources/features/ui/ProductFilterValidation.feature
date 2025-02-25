@@ -23,7 +23,7 @@ Feature: Validate Filter Functionality for Search
     When user search for a product "product.name.primary"
     And user click on search button
     Then verify user is on products page
-    When user selects the price range filter "₹500 - ₹1000"
+    When user selects the price range filter "₹1000 - ₹2000"
     Then verify user get results with only products priced between "500 - 1000"
 
 
