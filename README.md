@@ -1,4 +1,4 @@
-# Capstone Project - Automation Testing for Shoppers Stop & Restful Booker API
+# Automation Testing for Shoppers Stop & Restful Booker API
 
 ## Overview
 This project demonstrates the use of Selenium, Java, and Cucumber for automating testing of both the **Shoppers Stop** website and mobile app. Additionally, the project implements **API testing** for the **Restful Booker** API service to verify booking-related functionality.
