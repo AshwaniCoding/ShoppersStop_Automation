@@ -1,7 +1,7 @@
 # Automation Testing for Shoppers Stop & Restful Booker API
 
 ## Overview
-This project demonstrates the use of Selenium, Java, and Cucumber for automating testing of both the **Shoppers Stop** website and mobile app. Additionally, the project implements **API testing** for the **Restful Booker** API service to verify booking-related functionality.
+This project demonstrates the use of Selenium, Java, and Cucumber for automating testing of both the [**Shoppers Stop**](https://www.shoppersstop.com/) website and mobile app. Additionally, the project implements **API testing** for the [**Restful Booker**](https://restful-booker.herokuapp.com/) API service to verify booking-related functionality.
 
 ## Tech Stack:
 - **Selenium WebDriver**: For automating browser interactions and verifying the functionality of web pages.
