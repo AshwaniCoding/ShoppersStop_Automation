@@ -20,6 +20,9 @@ public class RequestSteps {
 
     @And("set header {string} to {string}")
     public void setHeaderTo(String key, String value) {
+        if (value.contains("auth.token")) {
+            value = "token=" + ConfigReader.getConfigValue("auth.token");
+        }
         RestAssuredManager.setHeader(key, value);
     }
 
@@ -70,5 +73,20 @@ public class RequestSteps {
     @And("set query parameter {string} to {string}")
     public void setQueryParameterTo(String parameter, String value) {
         RestAssuredManager.setQueryParameter(parameter, value);
+    }
+
+    @When("user performs put call")
+    public void userPerformsPutCall() {
+        RestAssuredManager.put();
+    }
+
+    @When("user performs patch call")
+    public void userPerformsPatchCall() {
+        RestAssuredManager.patch();
+    }
+
+    @When("user performs delete call")
+    public void userPerformsDeleteCall() {
+        RestAssuredManager.delete();
     }
 }

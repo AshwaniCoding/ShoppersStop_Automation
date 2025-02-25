@@ -22,14 +22,13 @@ public class ResponseSteps {
         Assert.assertFalse(RestAssuredManager.isFieldAvailable(jsonPath));
     }
 
-
-    @And("verify response body includes booking IDs where the {string} is {string}")
-    public void verifyResponseBodyIncludesBookingIDsWhereTheIs(String fieldName, String fieldValue) {
-        Assert.assertTrue(RestAssuredManager.isFieldAvailableWithValue(fieldName, fieldValue));
-    }
-
     @And("store the {string} into {string}")
     public void storeTheFromTheResponse(String jsonPath, String key) {
         ConfigReader.setConfigValue(key, RestAssuredManager.getResponseFieldValue(jsonPath));
+    }
+
+    @And("verify the {string} in the response body is {string}")
+    public void verifyTheInTheResponseBodyIs(String jsonPath, String fieldValue) {
+        Assert.assertTrue(RestAssuredManager.isFieldAvailableWithValue(jsonPath, fieldValue));
     }
 }
