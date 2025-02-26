@@ -1,5 +1,6 @@
 package com.automation.utils;
 
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -58,6 +59,12 @@ public class RestAssuredManager {
         response.then().log().all();
     }
 
+    public static void patch() {
+        requestSpecification.log().all();
+        response = requestSpecification.patch(endPoint);
+        response.then().log().all();
+    }
+
     public static int getStatusCode() {
         return response.getStatusCode();
     }
@@ -105,8 +112,6 @@ public class RestAssuredManager {
     public static boolean isFieldAvailableWithValue(String fieldName, String fieldValue) {
         try {
             String value = RestAssuredManager.getResponseFieldValue(fieldName);
-            System.out.println(fieldValue);
-            System.out.println(value);
             return value.equals(fieldValue);
         } catch (Exception e) {
             return false;
@@ -115,5 +120,14 @@ public class RestAssuredManager {
 
     public static void clear() {
         requestSpecification = RestAssured.given();
+    }
+
+    public static Object convertJsonToObjectFromFile(String content, Class<?> aClass) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(content, aClass);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

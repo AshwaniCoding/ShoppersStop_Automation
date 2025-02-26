@@ -1,5 +1,6 @@
 package com.automation.steps.api;
 
+import com.automation.pojo.CreateBookingRequestPojo;
 import com.automation.pojo.CreateTokenPojo;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.RestAssuredManager;
@@ -8,8 +9,6 @@ import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-
-import java.lang.reflect.Field;
 
 public class RequestSteps {
     @Given("user wants to call {string} end point")
@@ -20,11 +19,14 @@ public class RequestSteps {
 
     @And("set header {string} to {string}")
     public void setHeaderTo(String key, String value) {
+        if (value.contains("auth.token")) {
+            value = "token=" + ConfigReader.getConfigValue("auth.token");
+        }
         RestAssuredManager.setHeader(key, value);
     }
 
     @And("set request body from file {string}")
-    public void setRequestBodyFromFile(String fileName) {
+    public void setRequestBodyFromFile(String fileName) throws JsonProcessingException {
         RestAssuredManager.setBody(fileName);
     }
 
@@ -41,18 +43,10 @@ public class RequestSteps {
         ObjectMapper objectMapper = new ObjectMapper();
         CreateTokenPojo pojo = objectMapper.readValue(content, CreateTokenPojo.class);
 
-        Field field;
-
-        field = CreateTokenPojo.class.getDeclaredField("username");
-        field.setAccessible(true);
-        field.set(pojo, username);
-        field = CreateTokenPojo.class.getDeclaredField("password");
-        field.setAccessible(true);
-        field.set(pojo, password);
+        pojo.setUsername(username);
+        pojo.setPassword(password);
 
         System.out.println(">>>>>>>>>>>Pojo: " + pojo);
-
-
         RestAssuredManager.setBody(pojo);
 
     }
@@ -70,5 +64,30 @@ public class RequestSteps {
     @And("set query parameter {string} to {string}")
     public void setQueryParameterTo(String parameter, String value) {
         RestAssuredManager.setQueryParameter(parameter, value);
+    }
+
+    @When("user performs put call")
+    public void userPerformsPutCall() {
+        RestAssuredManager.put();
+    }
+
+    @When("user performs patch call")
+    public void userPerformsPatchCall() {
+        RestAssuredManager.patch();
+    }
+
+    @When("user performs delete call")
+    public void userPerformsDeleteCall() {
+        RestAssuredManager.delete();
+    }
+
+    @And("set request body from file {string} using pojo {string}")
+    public void setRequestBodyFromFileUsingPojo(String fileName, String pojoClass) throws Exception {
+        String pojoBasePath = "com.automation.pojo.";
+        String content = RestAssuredManager.getDataFromJsonFile(fileName);
+        Object requestPojo = RestAssuredManager.convertJsonToObjectFromFile(content, Class.forName(pojoBasePath + pojoClass));
+        ConfigReader.setObject("request.pojo", requestPojo);
+
+        RestAssuredManager.setBody(requestPojo);
     }
 }
