@@ -34,7 +34,6 @@
             <version>4.13.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -48,7 +47,6 @@
             <version>8.6.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
@@ -87,47 +85,156 @@
             <version>5.4.0</version>
         </dependency>
 
-
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.2</version>
-                <configuration>
-                    <includes>
-                        <include>**/TestRunner.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.8.1</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
+    <profiles>
+        <!-- Profile for Web Tests -->
+        <profile>
+            <id>web</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <platform>web</platform>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
                         <configuration>
-                            <projectName>EaseMyTripAutomation</projectName>
-                            <outputDirectory>CucumberReport</outputDirectory>
-                            <!-- optional, defaults to outputDirectory if not specified -->
-                            <inputDirectory>${project.build.directory}</inputDirectory>
-                            <jsonFiles>
-                                <!-- supports wildcard or name pattern -->
-                                <param>**/cucumber.json</param>
-                            </jsonFiles>
+                            <includes>
+                                <include>**/TestRunnerWeb.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <platform>${platform}</platform> <!-- Passing system property -->
+                            </systemPropertyVariables>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                    </plugin>
 
-        </plugins>
-    </build>
+                    <!-- Cucumber Reporting Plugin for Web Profile -->
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>5.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <outputDirectory>CucumberReport/web
+                                    </outputDirectory> <!-- Separate report folder for web -->
+                                    <inputDirectory>${project.build.directory}</inputDirectory>
+                                    <jsonFiles>
+                                        <param>**/cucumber.json</param>
+                                    </jsonFiles>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for Mobile Tests -->
+        <profile>
+            <id>mobile</id>
+            <properties>
+                <platform>mobile</platform>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <configuration>
+                            <includes>
+                                <include>**/TestRunnerAndroid.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <platform>${platform}</platform> <!-- Passing system property -->
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Cucumber Reporting Plugin for Mobile Profile -->
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>5.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <outputDirectory>CucumberReport/mobile
+                                    </outputDirectory> <!-- Separate report folder for mobile -->
+                                    <inputDirectory>${project.build.directory}</inputDirectory>
+                                    <jsonFiles>
+                                        <param>**/cucumber.json</param>
+                                    </jsonFiles>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile for API Tests -->
+        <profile>
+            <id>api</id>
+            <!-- No platform property for API profile -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <configuration>
+                            <includes>
+                                <include>**/TestRunnerApi.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Cucumber Reporting Plugin for API Profile -->
+                    <plugin>
+                        <groupId>net.masterthought</groupId>
+                        <artifactId>maven-cucumber-reporting</artifactId>
+                        <version>5.8.1</version>
+                        <executions>
+                            <execution>
+                                <id>execution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <outputDirectory>CucumberReport/api
+                                    </outputDirectory> <!-- Separate report folder for API -->
+                                    <inputDirectory>${project.build.directory}</inputDirectory>
+                                    <jsonFiles>
+                                        <param>**/cucumber.json</param>
+                                    </jsonFiles>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
