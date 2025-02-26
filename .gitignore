@@ -39,3 +39,5 @@ build/
 
 ### User Ignore ###
 **/src/test/resources/apks/
+**/CucumberReport/
+**/ExtentReport/
