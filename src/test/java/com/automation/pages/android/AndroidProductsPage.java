@@ -50,6 +50,8 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
 
     String filterBaseXpath = "//android.view.View[contains(@content-desc,'%s')]";
 
+    String filterBaseXpathCheckBox = "//android.view.View[contains(@content-desc,'%s')]/android.widget.CheckBox";
+
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc,'SHOW')]")
     WebElement showItems;
 
@@ -113,9 +115,17 @@ public class AndroidProductsPage extends AndroidBasePage implements ProductsPage
         WebElement filterName = driver.findElement(By.xpath(String.format(filterBaseXpath,"Price")));
         filterName.click();
 
-        WebElement filterValue = driver.findElement(By.xpath(String.format(filterBaseXpath, priceRange)));
-        filterValue.click();
+        String lowerPrice = priceRange.substring(0,priceRange.indexOf("-")+1);
 
+        String upperPrice = priceRange.substring(priceRange.indexOf("-"));
+        WebElement filterValueLowerEnd = driver.findElement(By.xpath(String.format(filterBaseXpath, lowerPrice)));
+        filterValueLowerEnd.click();
+
+
+        WebElement filterValueUpperEnd = driver.findElement(By.xpath(String.format(filterBaseXpathCheckBox, upperPrice)));
+        if(filterValueUpperEnd.getAttribute("checked").equals("false")){
+            filterValueUpperEnd.click();
+        }
         showItems.click();
     }
 
