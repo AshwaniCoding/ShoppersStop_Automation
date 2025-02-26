@@ -10,9 +10,6 @@ import java.util.List;
 
 public class AndroidProductDetailsPage extends AndroidBasePage implements ProductDetailsPage {
 
-    @FindBy(xpath = "//android.widget.ScrollView")
-    WebElement productDetailsPage;
-
     @FindBy(xpath = "//*[@content-desc='WISHLIST']")
     WebElement addToWishListButton;
 
