@@ -1,5 +1,6 @@
 package com.automation.utils;
 
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -119,5 +120,14 @@ public class RestAssuredManager {
 
     public static void clear() {
         requestSpecification = RestAssured.given();
+    }
+
+    public static Object convertJsonToObjectFromFile(String content, Class<?> aClass) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(content, aClass);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

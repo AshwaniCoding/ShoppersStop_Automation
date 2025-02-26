@@ -1,5 +1,6 @@
 package com.automation.steps.api;
 
+import com.automation.pojo.CreateBookingRequestPojo;
 import com.automation.pojo.CreateTokenPojo;
 import com.automation.utils.ConfigReader;
 import com.automation.utils.RestAssuredManager;
@@ -25,7 +26,7 @@ public class RequestSteps {
     }
 
     @And("set request body from file {string}")
-    public void setRequestBodyFromFile(String fileName) {
+    public void setRequestBodyFromFile(String fileName) throws JsonProcessingException {
         RestAssuredManager.setBody(fileName);
     }
 
@@ -78,5 +79,15 @@ public class RequestSteps {
     @When("user performs delete call")
     public void userPerformsDeleteCall() {
         RestAssuredManager.delete();
+    }
+
+    @And("set request body from file {string} using pojo {string}")
+    public void setRequestBodyFromFileUsingPojo(String fileName, String pojoClass) throws Exception {
+        String pojoBasePath = "com.automation.pojo.";
+        String content = RestAssuredManager.getDataFromJsonFile(fileName);
+        Object requestPojo = RestAssuredManager.convertJsonToObjectFromFile(content, Class.forName(pojoBasePath + pojoClass));
+        ConfigReader.setObject("request.pojo", requestPojo);
+
+        RestAssuredManager.setBody(requestPojo);
     }
 }

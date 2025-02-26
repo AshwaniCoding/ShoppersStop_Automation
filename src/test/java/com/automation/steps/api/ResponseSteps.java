@@ -39,4 +39,11 @@ public class ResponseSteps {
         Response response = RestAssuredManager.getResponse();
         response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("data/" + fileName));
     }
+
+    @And("verify response body matches request body")
+    public void verifyResponseBodyMatchesRequestBody() {
+        Object requestPojo = ConfigReader.getObject("request.pojo");
+        Object responsePojo = RestAssuredManager.convertJsonToObjectFromFile(RestAssuredManager.getResponse().asString(), requestPojo.getClass());
+        Assert.assertEquals(requestPojo, responsePojo);
+    }
 }

@@ -27,8 +27,16 @@ public class ConfigReader {
         props.setProperty(key, value);
     }
 
+    public static Object getObject(Object key) {
+        return props.get(key);
+    }
+
+    public static void setObject(Object key, Object value) {
+        props.put(key, value);
+    }
+
     public static List getPropertyByPartialKey(String partialKey) {
-        List<String> list= new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (String key : props.stringPropertyNames()) {
             if (key.contains(partialKey)) {
                 list.add(key);
