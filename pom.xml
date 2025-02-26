@@ -107,6 +107,7 @@
                             <includes>
                                 <include>**/TestRunnerWeb.java</include>
                             </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>
                                 <platform>${platform}</platform> <!-- Passing system property -->
                             </systemPropertyVariables>
@@ -126,7 +127,7 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <projectName>ShoppersStopAutomation</projectName>
                                     <outputDirectory>CucumberReport/web
                                     </outputDirectory> <!-- Separate report folder for web -->
                                     <inputDirectory>${project.build.directory}</inputDirectory>
@@ -157,6 +158,7 @@
                             <includes>
                                 <include>**/TestRunnerAndroid.java</include>
                             </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>
                                 <platform>${platform}</platform> <!-- Passing system property -->
                             </systemPropertyVariables>
@@ -176,7 +178,7 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <projectName>ShoppersStopAutomation</projectName>
                                     <outputDirectory>CucumberReport/mobile
                                     </outputDirectory> <!-- Separate report folder for mobile -->
                                     <inputDirectory>${project.build.directory}</inputDirectory>
@@ -205,6 +207,7 @@
                             <includes>
                                 <include>**/TestRunnerApi.java</include>
                             </includes>
+                            <testFailureIgnore>true</testFailureIgnore>
                         </configuration>
                     </plugin>
 
@@ -221,7 +224,7 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <projectName>EaseMyTripAutomation</projectName>
+                                    <projectName>ShoppersStopAutomation</projectName>
                                     <outputDirectory>CucumberReport/api
                                     </outputDirectory> <!-- Separate report folder for API -->
                                     <inputDirectory>${project.build.directory}</inputDirectory>

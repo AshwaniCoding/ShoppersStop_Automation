@@ -137,10 +137,12 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return isDisplayed(editAddressSectionHeading);
     }
 
+
     @Override
     public void clickOnAddAddressBtn() {
         addAddressBtn.click();
     }
+
 
     @Override
     public void enterAddressDetails() {
@@ -242,6 +244,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return false;
     }
 
+
     @Override
     public void clickOnDeleteAddressLink(String name) {
 
@@ -272,6 +275,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         confirmBtn.click();
     }
 
+
     @Override
     public boolean isAddressDeleted(String name) {
 
@@ -283,10 +287,12 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return (count + 1) == Integer.parseInt(ConfigReader.getConfigValue("address.count.by.name"));
     }
 
+
     @Override
     public void clickOnUpdateChangesBtn() {
         updateChangesBtn.click();
     }
+
 
     @Override
     public void updateAddressDetails() {
@@ -316,6 +322,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         clickOnKeyboardDoneBtn();
 
     }
+
 
     @Override
     public boolean isAddressUpdated() {
@@ -356,15 +363,18 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return false;
     }
 
+
     @Override
     public void clickOnEditProfileBtn() {
         editProfileLink.click();
     }
 
+
     @Override
     public void clickOnEditProfileUpdateChangesBtn() {
         editProfileUpdateChangesBtn.click();
     }
+
 
     @Override
     public void updateNameAndGender(String name, String gender) {
@@ -384,10 +394,12 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
     }
 
+
     @Override
     public boolean isEditProfileSectionDisplayed() {
         return isDisplayed(becomeClubMemberTextElement) && isDisplayed(editProfileUpdateChangesBtn);
     }
+
 
     @Override
     public boolean isProfileUpdated(String name, String gender) {
@@ -403,6 +415,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
         return details.contains(gender.toLowerCase());
     }
 
+
     private boolean isFieldUpdated(List<String> values, List<WebElement> addressList) {
 
         for (WebElement element : addressList) {
@@ -416,6 +429,7 @@ public class AndroidMyProfilePage extends AndroidBasePage implements MyProfilePa
 
         return false;
     }
+
 
     private int addressCountByName(String name) {
         int count = 0;

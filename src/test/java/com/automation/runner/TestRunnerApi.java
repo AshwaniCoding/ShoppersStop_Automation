@@ -2,6 +2,7 @@ package com.automation.runner;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -12,4 +13,10 @@ import org.junit.runner.RunWith;
         tags = "@api"
 )
 public class TestRunnerApi {
+
+    @Before
+    public void setUp(){
+        System.setProperty("extent.reporter.spark.out", "ExtentReport/api/report.html");
+    }
+
 }

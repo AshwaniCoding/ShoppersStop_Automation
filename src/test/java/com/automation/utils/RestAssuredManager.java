@@ -89,6 +89,7 @@ public class RestAssuredManager {
     }
 
     public static String getResponseFieldValue(String jsonPath) {
+
         return response.jsonPath().getString(jsonPath);
     }
 
