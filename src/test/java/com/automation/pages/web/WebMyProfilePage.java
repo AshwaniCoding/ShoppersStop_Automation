@@ -292,6 +292,7 @@ public class WebMyProfilePage extends WebBasePage implements MyProfilePage {
 
     @Override
     public void clickOnEditProfileUpdateChangesBtn() {
+        pause(2);
         editProfileUpdateChangesBtn.click();
     }
 
