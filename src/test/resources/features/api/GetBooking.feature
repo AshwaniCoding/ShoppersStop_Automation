@@ -14,6 +14,7 @@ Feature: Validate Get Booking Endpoint
     When user performs get call
     Then verify status code is 200
     And store the "[0].bookingid" into "stored.booking.id"
+
     Given user wants to call "/booking/{id}" end point
     And set header "Content-Type" to "application/json"
     And set path parameter "id" to "stored.booking.id"
@@ -28,6 +29,7 @@ Feature: Validate Get Booking Endpoint
     When user performs get call
     Then verify status code is 200
     And store the "[0].bookingid" into "stored.booking.id"
+
     Given user wants to call "/booking/{id}" end point
     And set header "Content-Type" to "application/json"
     And set path parameter "id" to "stored.booking.id"

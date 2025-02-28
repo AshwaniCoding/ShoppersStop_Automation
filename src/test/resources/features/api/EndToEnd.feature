@@ -19,6 +19,7 @@ Feature: End To End Feature
     And verify response body has field "bookingid"
     And verify the "booking.firstname" in the response body is "Ashwani"
     And store the "bookingid" into "stored.booking.id"
+
     Given user wants to call "/booking/{id}" end point
     And set header "Content-Type" to "application/json"
     And set header "Accept" to "application/json"
@@ -28,6 +29,7 @@ Feature: End To End Feature
     When user performs put call
     Then verify status code is 200
     And verify the "firstname" in the response body is "Karan"
+
     Given user wants to call "/booking/{id}" end point
     And set header "Content-Type" to "application/json"
     And set header "Cookie" to "token=<auth.token>"

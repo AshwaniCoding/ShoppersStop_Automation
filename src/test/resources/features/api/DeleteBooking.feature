@@ -10,6 +10,7 @@ Feature: Validate Delete Booking Endpoint
     And verify response body has field "bookingid"
     And verify the "booking.firstname" in the response body is "Ashwani"
     And store the "bookingid" into "stored.booking.id"
+
     Given user wants to call "/auth" end point
     And set header "Content-Type" to "application/json"
     And set request body from file "create_token.json"

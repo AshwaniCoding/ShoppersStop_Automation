@@ -13,6 +13,7 @@ Feature: Validate Create Booking Endpoint
     And verify response body has field "bookingid"
     And store the "bookingid" into "stored.booking.id"
     And verify the "booking.firstname" in the response body is "Ashwani"
+
     Given user wants to call "/booking/{id}" end point
     And set header "Content-Type" to "application/json"
     And set path parameter "id" to "stored.booking.id"
