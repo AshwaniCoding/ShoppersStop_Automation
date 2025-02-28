@@ -9,14 +9,12 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com.automation.steps",
-        plugin = {"pretty", "json:target/cucumber.json", "html:target/cucumber.html", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        plugin = {"pretty",
+                "json:target/cucumber.json",
+                "html:target/cucumber.html",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         tags = "@api"
 )
 public class TestRunnerApi {
-
-    @Before
-    public void setUp(){
-        System.setProperty("extent.reporter.spark.out", "ExtentReport/api/report.html");
-    }
 
 }
